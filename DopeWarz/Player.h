@@ -28,11 +28,12 @@ public:
 private:
 	double m_Money;
 	double m_Debt;
-	unsigned m_Health;
+	int m_Health;
 	unsigned m_Smarts;
 	unsigned m_Armour;
 	unsigned m_Damage;
 	unsigned m_Speed;
+
 	unsigned m_Backpack;
 };
 
@@ -46,7 +47,7 @@ public:
 private:
 	double m_Money;
 	double m_Debt;
-	unsigned m_Health;
+	int m_Health;
 	unsigned m_Smarts;
 	unsigned m_Armour;
 	unsigned m_Damage;
@@ -64,7 +65,7 @@ public:
 private:
 	double m_Money;
 	double m_Debt;
-	unsigned m_Health;
+	int m_Health;
 	unsigned m_Smarts;
 	unsigned m_Armour;
 	unsigned m_Damage;
@@ -82,7 +83,7 @@ public:
 private:
 	double m_Money;
 	double m_Debt;
-	unsigned m_Health;
+	int m_Health;
 	unsigned m_Smarts;
 	unsigned m_Armour;
 	unsigned m_Damage;

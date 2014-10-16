@@ -156,14 +156,10 @@ Player* DopeWarz::SetPlayer(unsigned type)
 {
 	switch (type)
 	{
-	case 1:	 m_Player = new SmartPlayer;
-		break;
-	case 2:	 m_Player = new TankyPlayer;
-		break;
-	case 3:	 m_Player = new QuickPlayer;
-		break;
-	case 4:	 m_Player = new DangerPlayer;
-		break;
+	case 1:	 m_Player = new SmartPlayer; break;
+	case 2:	 m_Player = new TankyPlayer; break;
+	case 3:	 m_Player = new QuickPlayer; break;
+	case 4:	 m_Player = new DangerPlayer; break;
 	}
 	return m_Player;
 }

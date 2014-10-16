@@ -7,7 +7,6 @@ int main()
 {
 	DopeWarz D;
 
-
 	cin.get();
 	return 0;
 }
