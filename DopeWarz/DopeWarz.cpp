@@ -16,8 +16,8 @@ DopeWarz::DopeWarz()
 		if (choice == 2){ LoadPlayer(); };
 		if (choice == 3){ DisplayLeaderBoard(); };
 	};
-	cout << " GOODBYE !" << endl;
-	//GoodBye();
+	//cout << " GOODBYE !" << endl;
+	GoodBye();
 }
 
 
@@ -31,6 +31,8 @@ int DopeWarz::MainMenu()
 	int choice;
 	while (true)
 	{
+		system("cls");
+		GameTitle();
 		cout << "\n(1) New Thug\n"
 			<< "(2) Load Thug\n"
 			<< "(3) LeaderBoards\n"
@@ -88,8 +90,12 @@ void DopeWarz::LoadUsers()
 }
 void DopeWarz::SetNewUser()
 {
+	system("cls");
+	GameTitle();
 	cout << "\n\nEnter Your Name Playa:\n";
 	string name = getLegitString();
+	system("cls");
+	GameTitle();
 	cout << "\nOk, "<< name <<" What Kind of Thug are you?\n";
 	cout << "\n(1) Smart\t (++ money from transactions)\n"
 		 << "(2) Tanky \t (++ Health)\n"
@@ -100,15 +106,13 @@ void DopeWarz::SetNewUser()
 	
 	switch (Class)
 	{
-	case 1:	strClass = "Smart";
-			break;
-	case 2:	strClass = "Tanky";
-		break;
-	case 3:	strClass = "Quick";
-		break;
-	case 4:	strClass = "Dangerous";
-		break;
+	case 1:	strClass = "Smart";	break;
+	case 2:	strClass = "Tanky";	break;
+	case 3:	strClass = "Quick";	break;
+	case 4:	strClass = "Dangerous";	break;
 	}
+	system("cls");
+	GameTitle();
 	cout << "\nAlrighty " << name << " you " << strClass << " Motha Fugga,  How Many Days ?\n";
 	cout << "\n(1) 20 \t (For the Wimps)\n"
 		<< "(2) 40 \t (For The Buisness Men)\n"
@@ -116,7 +120,7 @@ void DopeWarz::SetNewUser()
 		<< "(4) 160  (Hardcore Bloodshot Eyes!)\n";
 	int Days = getLegitInt(1, 4);
 
-	Play(name, Class, Days);
+	Play(name, Class, Days); //TAKES ColleCTED DATA PLAYS GAME
 
 }
 void DopeWarz::LoadPlayer()
@@ -127,6 +131,8 @@ void DopeWarz::LoadPlayer()
 
 void DopeWarz::DisplayLeaderBoard() const
 {
+	system("cls");
+	GameTitle();
 	cout << "\n\nBIG EXTRAVAGENT LEADERBOARDS ASCII ART";
 	cout << "\n(1) 20 Days\n"
 		<< "(2) 40 Days\n"
@@ -164,6 +170,15 @@ Player* DopeWarz::SetPlayer(unsigned type)
 	return m_Player;
 }
 
+
+void DopeWarz::DisplayMarket() const
+{
+
+
+
+}
+
+
 void DopeWarz::Play(string name, unsigned Class, unsigned days)
 {
 	m_DaysLeft = days;
@@ -177,7 +192,7 @@ void DopeWarz::Play(string name, unsigned Class, unsigned days)
 
 	string pname = name;
 	Player* p = SetPlayer(Class);
-
+	system("cls");
 	cout << "\n\nHey There " << name << " Welcome to the streets !\n";
 	bool quit = false;
 	
@@ -189,36 +204,28 @@ void DopeWarz::Play(string name, unsigned Class, unsigned days)
 		{
 			case 0 :
 				int choice = 2;
-				while (choice != 0 && choice != 4 && m_DaysLeft != 0 && p->GetHealth() != 0)
+				while (choice != 0 && choice != 4 && m_DaysLeft != 0 && p->GetHealth() > 0)
 				{
 					cout << "\n(1) Buy !\n"
-						<< "(2) Sell !\n"
-						<< "(3) Show Stats\n"
-						<< "(4) Move Location\n"
-						<< "(0) Save & Quit\n"
-						<< "<--Days Left: " << m_DaysLeft << "-->\n";
-						choice = getLegitInt(0, 4);
-						switch (choice)
-						{
-							case 0:	quit = true; break;
-							case 1: cout << "\n\nBUYS!\n\n"; DDay(); break;
-							case 2: cout << "\n\nSELLS!\n\n"; DDay(); break;
-							case 3: p->DisplayStats(pname); break;
-							case 4: cout << "\n\nMOVING!\n\n"; DDay(); break;
-						}
+					<< "(2) Sell !\n"
+					<< "(3) Show Stats\n"
+					<< "(4) Move Location\n"
+					<< "(0) Save & Quit\n"
+					<< "<--Days Left: " << m_DaysLeft << "-->\n";
+					choice = getLegitInt(0, 4);
+					switch (choice)
+					{
+						case 0:	quit = true; break;
+						case 1: system("cls"); cout << "\n\nBUYS!\n\n"; DDay(); break;
+						case 2: system("cls"); cout << "\n\nSELLS!\n\n"; DDay(); break;
+						case 3: system("cls"); p->DisplayStats(pname); break;
+						case 4: system("cls"); cout << "\n\nMOVING!\n\n"; DDay(); break;
+					}		
 				}
 
+				//INSERT LOCATIONS HERE
 		}
-	
-
-
-
-
-
 	}
-
-
-
 }
 
 
@@ -261,11 +268,25 @@ string DopeWarz::getLegitString() const
 	return ret;
 }
 
+
 void DopeWarz::GameTitle() const
 {
-
+	cout << " \n"
+		<< "'||''|.                          '|| '||'  '|'                        \n"
+		<< " ||   ||    ...  ... ...    ....  '|. '|.  .' ....  ... .. ...... \n"
+		<< " ||    || .|  '|. ||'  || .|...||  ||  ||  | '' .||  ||' ' '  .|' \n"
+		<< " ||    || ||   || ||    | ||        ||| |||  .|' ||  ||     .|'   \n"
+		<< ".||...|'   '|..|' ||...'   '|...'    |   |   '|..'|'.||.   ||....|\n"
+		<< "                  ||                                                \n"
+		<< "                 ''''         \n";
 }
 void DopeWarz::GoodBye() const
 {
-
+	cout << " \n"
+		<< "'||''|.                                     .|.\n"
+		<< " ||   ||   ....   ....     ....    ....     |||\n"
+		<< " ||...|' .|...|| '' .||  .|   '' .|...||    '|'\n"
+		<< " ||      ||      .|' ||  ||      ||          | \n"
+		<< ".||.      '|...' '|..'|'  '|...'  '|...'     . \n"
+		<< "                                            '|'\n";
 }

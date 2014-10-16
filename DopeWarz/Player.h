@@ -33,7 +33,7 @@ private:
 	unsigned m_Armour;
 	unsigned m_Damage;
 	unsigned m_Speed;
-
+	unsigned m_UsedSpace;
 	unsigned m_Backpack;
 };
 
@@ -52,6 +52,7 @@ private:
 	unsigned m_Armour;
 	unsigned m_Damage;
 	unsigned m_Speed;
+	unsigned m_UsedSpace;
 	unsigned m_Backpack;
 };
 
@@ -70,6 +71,7 @@ private:
 	unsigned m_Armour;
 	unsigned m_Damage;
 	unsigned m_Speed;
+	unsigned m_UsedSpace;
 	unsigned m_Backpack;
 };
 
@@ -88,6 +90,7 @@ private:
 	unsigned m_Armour;
 	unsigned m_Damage;
 	unsigned m_Speed;
+	unsigned m_UsedSpace;
 	unsigned m_Backpack;
 };
 

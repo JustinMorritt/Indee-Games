@@ -13,8 +13,9 @@ public:
 	DopeWarz();
 	~DopeWarz();
 	int MainMenu();
-	void GameTitle() const;
 	void DisplayLeaderBoard() const;
+	void DisplayMarket() const;
+	void GameTitle() const;
 	void GoodBye() const;
 	void LoadUsers();
 	void SetNewUser();
