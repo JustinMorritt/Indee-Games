@@ -154,3 +154,40 @@ void DangerPlayer::IncreaseDebt()
 		m_Debt += (m_Debt * 0.05);
 	}
 }
+
+
+void SmartPlayer::Buy()
+{
+
+}
+void SmartPlayer::Sell()
+{
+
+}
+
+void TankyPlayer::Buy()
+{
+
+}
+void TankyPlayer::Sell()
+{
+
+}
+
+void QuickPlayer::Buy()
+{
+
+}
+void QuickPlayer::Sell()
+{
+
+}
+
+void DangerPlayer::Buy()
+{
+
+}
+void DangerPlayer::Sell()
+{
+
+}

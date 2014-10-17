@@ -18,13 +18,19 @@ public:
 	virtual unsigned GetMoney() = 0;
 	virtual unsigned GetDebt() = 0;
 	virtual void IncreaseDebt() = 0;
+	virtual void Buy() = 0;
+	virtual void Sell() = 0;
 	Player();
 	~Player();
 };
 
-//MAKE DIFFERENT CLASSES OF PLAYERS  ...  SMART(makes more money from selling) , TANKY(more hp) , QUICK(higher chance to run away from cops) ,
-									//... DANGEROUS (more damage with weapons)
-
+/*
+MAKE DIFFERENT CLASSES OF PLAYERS  ...
+SMART		(makes more money from selling) ,
+TANKY		(more hp) ,
+QUICK		(higher chance to run away from cops) ,
+DANGEROUS	(more damage with weapons)
+*/
 
 
 class SmartPlayer : public Player
@@ -40,6 +46,8 @@ public:
 	virtual void DisplayStats(string name);
 	virtual unsigned GetBackpackSpace();
 	virtual unsigned GetUsedSpace();
+	virtual void Buy();
+	virtual void Sell();
 private:
 	unsigned m_Money;
 	unsigned m_Debt;
@@ -68,6 +76,8 @@ public:
 	virtual void IncreaseDebt();
 	virtual unsigned GetBackpackSpace();
 	virtual unsigned GetUsedSpace();
+	virtual void Buy();
+	virtual void Sell();
 private:
 	unsigned m_Money;
 	unsigned m_Debt;
@@ -96,6 +106,8 @@ public:
 	virtual void DisplayStats(string name);
 	virtual unsigned GetBackpackSpace();
 	virtual unsigned GetUsedSpace();
+	virtual void Buy();
+	virtual void Sell();
 private:
 	unsigned m_Money;
 	unsigned m_Debt;
@@ -124,6 +136,8 @@ public:
 	virtual void IncreaseDebt();
 	virtual unsigned GetBackpackSpace();
 	virtual unsigned GetUsedSpace();
+	virtual void Buy();
+	virtual void Sell();
 private:
 	unsigned m_Money;
 	unsigned m_Debt;

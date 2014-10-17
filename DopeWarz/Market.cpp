@@ -91,7 +91,7 @@ void Market::SetDrugMap(map<string, double> map)
 	m_Drugs = map;
 }
 
-map<string, double>& Market::GetMap()
+vector<pair<string, double>>& Market::GetMap()
 {
 	return m_Drugs;
 }
