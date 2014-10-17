@@ -3,6 +3,7 @@
 
 #include <map>
 #include <iostream>
+#include "randgen.h"
 
 using namespace std;
 
@@ -12,8 +13,10 @@ public:
 	Market();
 	~Market();
 	void BuildMarket();
-	void DisplayMarket() const;
+	void SetDrugMap(map<string, double> map);
+	void DisplayMarket();
 	void GetPrice() const;
+	map<string, double>& GetMap();
 
 private:
 	//DRUG NAME   PRICE
