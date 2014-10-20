@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <map>
+#include "Market.h"
 
 using namespace std;
 
@@ -18,8 +19,9 @@ public:
 	virtual unsigned GetMoney() = 0;
 	virtual unsigned GetDebt() = 0;
 	virtual void IncreaseDebt() = 0;
-	virtual void Buy() = 0;
-	virtual void Sell() = 0;
+	virtual void Buy(Market& m) = 0;
+	virtual void Sell(Market& m) = 0;
+	virtual void ShowBackpack() = 0;
 	Player();
 	~Player();
 };
@@ -44,10 +46,17 @@ public:
 	virtual unsigned GetDebt() { return m_Debt; };
 	virtual void IncreaseDebt();
 	virtual void DisplayStats(string name);
-	virtual unsigned GetBackpackSpace();
-	virtual unsigned GetUsedSpace();
-	virtual void Buy();
-	virtual void Sell();
+	virtual unsigned GetBackpackSpace(){ return m_Backpack; };
+	virtual unsigned GetUsedSpace(){ return m_UsedSpace; };
+	vector<pair<string, pair<unsigned, unsigned>>>& GetSack(){ return m_Product; };
+	void FillSack(int units){ m_UsedSpace += units; };
+	void EmptySack(int units){ m_UsedSpace -= units; };
+	virtual void Buy(Market& m);
+	virtual void Sell(Market& m);
+	virtual void ShowBackpack();
+
+	friend int getLegitInt(int low, int high);
+
 private:
 	unsigned m_Money;
 	unsigned m_Debt;
@@ -74,10 +83,16 @@ public:
 	virtual unsigned GetMoney(){ return m_Money; };
 	virtual unsigned GetDebt() { return m_Debt; };
 	virtual void IncreaseDebt();
-	virtual unsigned GetBackpackSpace();
-	virtual unsigned GetUsedSpace();
-	virtual void Buy();
-	virtual void Sell();
+	virtual unsigned GetBackpackSpace(){ return m_Backpack; };
+	virtual unsigned GetUsedSpace(){ return m_UsedSpace; };
+	vector<pair<string, pair<unsigned, unsigned>>>& GetSack(){ return m_Product; };
+	void FillSack(int units){ m_UsedSpace += units; };
+	void EmptySack(int units){ m_UsedSpace -= units; };
+	virtual void Buy(Market& m);
+	virtual void Sell(Market& m);
+	virtual void ShowBackpack();
+
+	friend int getLegitInt(int low, int high);
 private:
 	unsigned m_Money;
 	unsigned m_Debt;
@@ -104,10 +119,16 @@ public:
 	virtual unsigned GetDebt() { return m_Debt; };
 	virtual void IncreaseDebt();
 	virtual void DisplayStats(string name);
-	virtual unsigned GetBackpackSpace();
-	virtual unsigned GetUsedSpace();
-	virtual void Buy();
-	virtual void Sell();
+	virtual unsigned GetBackpackSpace(){ return m_Backpack; };
+	virtual unsigned GetUsedSpace(){ return m_UsedSpace; };
+	vector<pair<string, pair<unsigned, unsigned>>>& GetSack(){ return m_Product; };
+	void FillSack(int units){ m_UsedSpace += units; };
+	void EmptySack(int units){ m_UsedSpace -= units; };
+	virtual void Buy(Market& m);
+	virtual void Sell(Market& m);
+	virtual void ShowBackpack();
+
+	friend int getLegitInt(int low, int high);
 private:
 	unsigned m_Money;
 	unsigned m_Debt;
@@ -134,10 +155,16 @@ public:
 	virtual unsigned GetDebt() { return m_Debt; };
 	virtual void DisplayStats(string name);
 	virtual void IncreaseDebt();
-	virtual unsigned GetBackpackSpace();
-	virtual unsigned GetUsedSpace();
-	virtual void Buy();
-	virtual void Sell();
+	virtual unsigned GetBackpackSpace(){ return m_Backpack; };
+	virtual unsigned GetUsedSpace(){ return m_UsedSpace; };
+	void FillSack(int units){ m_UsedSpace += units; };
+	void EmptySack(int units){ m_UsedSpace -= units; };
+	vector<pair<string, pair<unsigned, unsigned>>>& GetSack(){ return m_Product; };
+	virtual void Buy(Market& m);
+	virtual void Sell(Market& m);
+	virtual void ShowBackpack();
+
+	friend int getLegitInt(int low, int high);
 private:
 	unsigned m_Money;
 	unsigned m_Debt;

@@ -81,10 +81,16 @@ void Market::DisplayMarket()
 		++i;
 	}
 }
-void Market::GetPrice() const
+double Market::GetPrice(int choice) const
 {
-
+	return m_Drugs[choice - 1].second;
 }
+
+string Market::GetName(int choice) const
+{
+	return m_Drugs[choice - 1].first;
+}
+
 
 void Market::SetDrugMap(vector<pair<string, double>> map)
 {

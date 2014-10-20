@@ -175,13 +175,6 @@ Player* DopeWarz::SetPlayer(unsigned type)
 }
 
 
-void DopeWarz::DisplayMarket() const
-{
-	Market m;
-	m.BuildMarket();
-	m.DisplayMarket();
-}
-
 
 void DopeWarz::Play(string name, unsigned Class, unsigned days)
 {
@@ -210,7 +203,11 @@ void DopeWarz::Play(string name, unsigned Class, unsigned days)
 				int choice = 2;
 				while (choice != 0 && choice != 4 && m_DaysLeft != 0 && p->GetHealth() > 0)
 				{
-					DisplayMarket();
+					Market market;
+					Market& m = market;
+					m.BuildMarket();
+					m.DisplayMarket();
+
 					cout << "\n(1) Buy !\n"
 						<< "(2) Sell !\n"
 						<< "(3) Show Stats\n"
@@ -228,8 +225,8 @@ void DopeWarz::Play(string name, unsigned Class, unsigned days)
 					switch (choice)
 					{
 						case 0:	quit = true; break;
-						case 1: system("cls"); cout << "\n\nBUYS!\n\n"; DDay(p); break;
-						case 2: system("cls"); cout << "\n\nSELLS!\n\n"; DDay(p); break;
+						case 1:  p->Buy(m);  DDay(p); system("cls"); break;
+						case 2:  p->Sell(m); DDay(p); system("cls"); break;
 						case 3: system("cls"); p->DisplayStats(pname); break;
 						case 4: system("cls"); cout << "\n\nMOVING!\n\n"; DDay(p); break;
 					}		

@@ -1,5 +1,7 @@
+#include <sstream> 
 #include "Player.h"
 #include <iomanip>
+#include <map>
 
 
 Player::Player()
@@ -91,41 +93,6 @@ void DangerPlayer::DisplayStats(string name)
 }
 
 
-unsigned SmartPlayer::GetBackpackSpace()
-{
-	return m_Backpack;
-}
-unsigned TankyPlayer::GetBackpackSpace()
-{
-	return m_Backpack;
-}
-unsigned QuickPlayer::GetBackpackSpace()
-{
-	return m_Backpack;
-}
-unsigned DangerPlayer::GetBackpackSpace()
-{
-	return m_Backpack;
-}
-
-
-unsigned SmartPlayer::GetUsedSpace()
-{
-	return m_UsedSpace;
-}
-unsigned TankyPlayer::GetUsedSpace()
-{
-	return m_UsedSpace;
-}
-unsigned QuickPlayer::GetUsedSpace()
-{
-	return m_UsedSpace;
-}
-unsigned DangerPlayer::GetUsedSpace()
-{
-	return m_UsedSpace;
-}
-
 void SmartPlayer::IncreaseDebt()
 {
 	if (m_Debt > 0)
@@ -156,38 +123,133 @@ void DangerPlayer::IncreaseDebt()
 }
 
 
-void SmartPlayer::Buy()
+void SmartPlayer::ShowBackpack()
+{
+	vector<pair<string, pair<unsigned, unsigned>>>& backpack = GetSack();
+
+}
+void TankyPlayer::ShowBackpack()
 {
 
 }
-void SmartPlayer::Sell()
+void QuickPlayer::ShowBackpack()
 {
 
 }
-
-void TankyPlayer::Buy()
-{
-
-}
-void TankyPlayer::Sell()
-{
-
-}
-
-void QuickPlayer::Buy()
-{
-
-}
-void QuickPlayer::Sell()
+void DangerPlayer::ShowBackpack()
 {
 
 }
 
-void DangerPlayer::Buy()
+
+void SmartPlayer::Buy(Market& m)
+{
+	vector<pair<string, double>>& market = m.GetMap();
+	cout << "\nWhat are you looking to buy? 'type (number) in'\n";
+	int choice = getLegitInt(1, market.size());
+	
+	if (GetUsedSpace() != GetBackpackSpace())
+	{
+		cout << "How Many " << m.GetName(choice) << " Units Would you like to buy?  \n" << (GetBackpackSpace() - GetUsedSpace()) << " Backpack Space , (0) to go back.  \n";
+		int units = getLegitInt(0, (GetBackpackSpace() - GetUsedSpace()));
+		double purchaseVal = (units * m.GetPrice(choice));
+		bool bought = false;
+		while (!bought && units != 0)
+		{
+			if (units != 0 && units <= (GetBackpackSpace() - GetUsedSpace()))
+			{
+				
+				while (!bought && units != 0)
+				{
+					if (purchaseVal <= GetMoney())
+					{
+						bought = true;
+						FillSack(units);
+						// pair<string, pair<unsigned, unsigned>>
+						m_Product.push_back(make_pair(m.GetName(choice), make_pair(units, m.GetPrice(choice))));
+						m_Money -= purchaseVal;
+						cout << "\nBought " << units << " " << m.GetName(choice) << " Units .\n";
+						system("pause");
+						break;
+					}
+					else
+					{
+						cout << "\nNot enought money for that , try again ..(0) to go back\n";
+						units = getLegitInt(0, (GetBackpackSpace() - GetUsedSpace()));
+						purchaseVal = (units * m.GetPrice(choice));
+					}
+				}
+			}
+			else if(units > (GetBackpackSpace() - GetUsedSpace()))
+			{
+				cout << "\nNot enought space..\n";
+				system("pause");
+			}
+		}
+	}
+	else if (GetUsedSpace() == GetBackpackSpace())
+	{
+		cout << "\n\n NO SPACE LEFT ! \n";
+		system("pause");
+	}
+
+
+	
+
+
+
+}
+void SmartPlayer::Sell(Market& m)
 {
 
 }
-void DangerPlayer::Sell()
+
+void TankyPlayer::Buy(Market& m)
 {
 
 }
+void TankyPlayer::Sell(Market& m)
+{
+
+}
+
+void QuickPlayer::Buy(Market& m)
+{
+
+}
+void QuickPlayer::Sell(Market& m)
+{
+
+}
+
+void DangerPlayer::Buy(Market& m)
+{
+
+}
+void DangerPlayer::Sell(Market& m)
+{
+
+}
+
+
+int getLegitInt(int low, int high)
+{
+	int ret;
+	do
+	{
+		std::string str;
+		std::getline(std::cin, str);
+		std::stringstream ss(str);
+		ss >> ret;
+		if ((ss) && (ret >= low && ret <= high))
+		{
+			break;
+		}
+		else
+		{
+			std::cout << "-<error>--wrong option--choose(" << low << " - " << high << ")--" << std::endl;
+			continue;
+		}
+	} while (true);
+	return ret;
+};

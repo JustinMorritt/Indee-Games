@@ -16,7 +16,8 @@ public:
 	void BuildMarket();
 	void SetDrugMap(vector<pair<string, double>> map);
 	void DisplayMarket();
-	void GetPrice() const;
+	double GetPrice(int choice) const;
+	string GetName(int choice) const;
 	vector<pair<string, double>>& GetMap();
 
 private:
