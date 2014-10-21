@@ -229,8 +229,11 @@ void SmartPlayer::Sell(Market& m)
 			{
 				EmptySack(backpack[choice - 1].second.first); //Empty
 				m_Money += (backpack[choice - 1].second.first * m.MarketPrice(backpack[choice - 1].first));
-				cout << "\n Sold " << backpack[choice - 1].second.first << " " << backpack[choice - 1].first << " at $" << m.MarketPrice(backpack[choice - 1].first) << endl;
-				//backpack.erase(choice - 1, choice - 1);
+				cout << "\n Sold " << backpack[choice - 1].second.first 
+					 << " " << backpack[choice - 1].first << " at $" 
+					 << m.MarketPrice(backpack[choice - 1].first) << endl;
+
+				backpack.erase(backpack.begin()+ choice -1);
 
 				if (backpack.size() != 0) //THIS WILLL FIX WHEN DELETING THE ITEM FROM BACKPACK
 				{

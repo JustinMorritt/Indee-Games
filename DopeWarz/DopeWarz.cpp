@@ -190,23 +190,25 @@ void DopeWarz::Play(string name, unsigned Class, unsigned days)
 	string pname = name;
 	Player* p = SetPlayer(Class);
 	system("cls");
-	cout << "\n\nHey There " << name << " Welcome to the streets !\n";
+	cout << "\n\nHey There " << name << " Welcome to the streets ! \n";
+
+
 	bool quit = false;
 	bool showedStats = false;
+	bool changeLocation = false;
+	int Location = 0; int choice2 = 2; int choice = 2;
 	while (p->GetHealth() != 0 && m_DaysLeft != 0 && quit == false)
 	{
-		int Location = 0;
-
+		Market market;
+		Market& m = market;
 		switch (Location)
 		{
 			case 0 :
-				int choice = 2;
-				Market market;
-				Market& m = market;
 				while (choice != 0 && choice != 4 && m_DaysLeft != 0 && p->GetHealth() > 0)
 				{
 					if (!showedStats){m.BuildMarket();}
 					m.DisplayMarket();
+					changeLocation = false;
 					showedStats = false;
 				
 						cout << "\n\n*********************************************\n"
@@ -223,18 +225,76 @@ void DopeWarz::Play(string name, unsigned Class, unsigned days)
 					cout << "(1) Buy !\n"
 						<< "(2) Sell !\n"
 						<< "(3) Show Stats\n"
-						<< "(4) Move Location\n"
+						<< "(4) Move Location (Current: Home/SafeHouse)\n"
 						<< "(0) Save & Quit\n";
 					choice = getLegitInt(0, 4);
 					switch (choice)
 					{
 						case 0:	quit = true; break;
 						case 1:  p->Buy(m);  DDay(p); system("cls"); break;
-						case 2:  p->Sell(m); DDay(p); system("cls"); break;
+						case 2: if (p->GetUsedSpace() == 0)
+						{
+									system("cls");
+									showedStats = true;
+									break;
+						}
+								else
+								{
+									p->Sell(m); DDay(p); system("cls"); break;
+								}
+							
 						case 3: system("cls"); p->DisplayStats(pname); showedStats = true; break;
-						case 4: system("cls"); cout << "\n\nMOVING!\n\n"; DDay(p); break;
+						case 4:  Location = MoveLoacation(); system("cls"); changeLocation = true;  DDay(p); break;
 					}		
 				}
+				break;
+
+			case 1:
+				while (choice2 != 0 && choice2 != 4 && m_DaysLeft != 0 && p->GetHealth() > 0)
+				{
+					if (!showedStats){ m.BuildMarket(); }
+					m.DisplayMarket();
+					showedStats = false;
+					changeLocation = false;
+
+					cout << "\n\n*********************************************\n"
+						<< "*   BackPack: " << p->GetUsedSpace() << "/" << p->GetBackpackSpace() << " "
+						<< "    Health: " << p->GetHealth() << " / " << p->GetMaxHealth() << "   \n"
+						<< "*   Money: $" << p->GetMoney() << "";
+
+					if (p->GetDebt() != 0)
+					{
+						cout << "  -> Debt: $" << p->GetDebt() << "";
+					}
+					cout << "  Days: " << m_DaysLeft << "   "
+						<< "\n*********************************************\n\n";
+					cout << "(1) Buy !\n"
+						<< "(2) Sell !\n"
+						<< "(3) Show Stats\n"
+						<< "(4) Move Location (Current: Downtown Dundas)\n"
+						<< "(5) Loan Shark " << "Debt: $" << p->GetDebt() << "\n"
+						<< "(0) Save & Quit\n";
+					choice2 = getLegitInt(0, 5);
+					switch (choice2)
+					{
+					case 0:	quit = true; break;
+					case 1:  p->Buy(m);  DDay(p); system("cls"); break;
+					case 2: if (p->GetUsedSpace() == 0)
+					{
+								system("cls");
+								showedStats = true;
+								break;
+					}
+							else
+							{
+								p->Sell(m); DDay(p); system("cls"); break;
+							}
+
+					case 3:  p->DisplayStats(pname); system("cls"); showedStats = true; break;
+					case 4:  Location = MoveLoacation(); system("cls"); changeLocation = true; DDay(p); break;
+					}
+				}
+				break;
 
 				//INSERT LOCATIONS HERE
 		}
@@ -279,6 +339,31 @@ string DopeWarz::getLegitString() const
 		}
 	} while (true);
 	return ret;
+}
+
+
+int DopeWarz::MoveLoacation() const
+{
+	int choice;
+	cout << "(1) Downtown Dundas		(LoanShark) \n"
+		 << "(2) Wellington St		(Hospital)\n"
+		 << "(3) Richmond Row		(Bank)\n"
+		 << "(4) White Oaks Parking Lot	(Gun Trader) \n"
+		 << "(5) Library			(Improve Stats)\n"
+		 << "(6) GoodLife			(Get Buffer)\n"
+		 << "(0) Go home			(Safe House)\n";
+	choice = getLegitInt(0, 6);
+	switch (choice)
+	{
+	case 0:return 0; 
+	case 1:return 1; 
+	case 2:return 2; 
+	case 3:return 3; 
+	case 4:return 4;
+	case 5:return 5;
+	case 6:return 6; 
+	}
+	return 0;
 }
 
 
