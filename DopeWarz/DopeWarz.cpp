@@ -192,7 +192,7 @@ void DopeWarz::Play(string name, unsigned Class, unsigned days)
 	system("cls");
 	cout << "\n\nHey There " << name << " Welcome to the streets !\n";
 	bool quit = false;
-	
+	bool showedStats = false;
 	while (p->GetHealth() != 0 && m_DaysLeft != 0 && quit == false)
 	{
 		int Location = 0;
@@ -201,33 +201,37 @@ void DopeWarz::Play(string name, unsigned Class, unsigned days)
 		{
 			case 0 :
 				int choice = 2;
+				Market market;
+				Market& m = market;
 				while (choice != 0 && choice != 4 && m_DaysLeft != 0 && p->GetHealth() > 0)
 				{
-					Market market;
-					Market& m = market;
-					m.BuildMarket();
+					if (!showedStats){m.BuildMarket();}
 					m.DisplayMarket();
-
-					cout << "\n(1) Buy !\n"
+					showedStats = false;
+				
+						cout << "\n\n*********************************************\n"
+						<< "*   BackPack: " << p->GetUsedSpace() << "/" << p->GetBackpackSpace() << " "
+						<< "    Health: " << p->GetHealth() << " / " << p->GetMaxHealth() << "   \n"
+						<< "*   Money: $" << p->GetMoney() << "";
+						
+					if (p->GetDebt() != 0)
+					{
+						cout << "  -> Debt: $" << p->GetDebt() << "";
+					}
+					cout << "  Days: " << m_DaysLeft << "   "
+						<< "\n*********************************************\n\n";
+					cout << "(1) Buy !\n"
 						<< "(2) Sell !\n"
 						<< "(3) Show Stats\n"
 						<< "(4) Move Location\n"
-						<< "(0) Save & Quit\n"
-						<< "\n<--Days Left: " << m_DaysLeft << "-->\n"
-						<< "<--BackPack: " << p->GetUsedSpace() << " / " << p->GetBackpackSpace() << "-->\n"
-						<< "<--Health: " << p->GetHealth() << " / " << p->GetMaxHealth() << "-->\n"
-						<< "<--Money: $"  << p->GetMoney() << "-->\n";
-					if (p->GetDebt() != 0)
-					{
-						cout << "<--Debt: $" << p->GetDebt() << "-->\n";
-					}
+						<< "(0) Save & Quit\n";
 					choice = getLegitInt(0, 4);
 					switch (choice)
 					{
 						case 0:	quit = true; break;
 						case 1:  p->Buy(m);  DDay(p); system("cls"); break;
 						case 2:  p->Sell(m); DDay(p); system("cls"); break;
-						case 3: system("cls"); p->DisplayStats(pname); break;
+						case 3: system("cls"); p->DisplayStats(pname); showedStats = true; break;
 						case 4: system("cls"); cout << "\n\nMOVING!\n\n"; DDay(p); break;
 					}		
 				}

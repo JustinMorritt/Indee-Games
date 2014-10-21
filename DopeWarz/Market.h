@@ -14,15 +14,17 @@ public:
 	Market();
 	~Market();
 	void BuildMarket();
-	void SetDrugMap(vector<pair<string, double>> map);
+	void SetDrugMap(vector<pair<string, unsigned>> map);
 	void DisplayMarket();
-	double GetPrice(int choice) const;
+	unsigned GetPrice(int choice) const;
+	bool MarketCompare(string drug);
+	unsigned MarketPrice(string drug);
 	string GetName(int choice) const;
-	vector<pair<string, double>>& GetMap();
+	vector<pair<string, unsigned>>& GetMap();
 
 private:
 	//DRUG NAME   PRICE
-	vector<pair<string, double>> m_Drugs;
+	vector<pair<string, unsigned>> m_Drugs;
 
 };
 

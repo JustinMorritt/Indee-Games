@@ -19,7 +19,7 @@ Market::~Market()
 void Market::BuildMarket()
 {
 	RandGen rNg;
-	vector<pair<string, double>> m;
+	vector<pair<string, unsigned>> m;
 	if (int i = (rNg(100) + 1) < 50)
 	{
 		m.push_back(make_pair("Peyote", rNg(900) + 150));
@@ -75,13 +75,13 @@ void Market::DisplayMarket()
 {
 	cout << "\n\n<-----The Market Today----->\n\n";
 	int i = 1;
-	for (vector<pair<string, double>>::iterator it = m_Drugs.begin(); it != m_Drugs.end(); ++it)
+	for (vector<pair<string, unsigned>>::iterator it = m_Drugs.begin(); it != m_Drugs.end(); ++it)
 	{	
 		cout << "(" << i << ") "  << setw(10) << it->first << " $" << it->second << endl;
 		++i;
 	}
 }
-double Market::GetPrice(int choice) const
+unsigned Market::GetPrice(int choice) const
 {
 	return m_Drugs[choice - 1].second;
 }
@@ -92,12 +92,39 @@ string Market::GetName(int choice) const
 }
 
 
-void Market::SetDrugMap(vector<pair<string, double>> map)
+void Market::SetDrugMap(vector<pair<string, unsigned>> map)
 {
 	m_Drugs = map;
 }
 
-vector<pair<string, double>>& Market::GetMap()
+vector<pair<string, unsigned>>& Market::GetMap()
 {
 	return m_Drugs;
+}
+
+
+bool Market::MarketCompare(string drug) 
+{
+	string ret = drug;
+	for (vector<pair<string, unsigned>>::iterator it = m_Drugs.begin(); it != m_Drugs.end(); ++it)
+	{
+		if (it->first == ret)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+unsigned Market::MarketPrice(string drug)
+{
+	string ret = drug;
+	for (vector<pair<string, unsigned>>::iterator it = m_Drugs.begin(); it != m_Drugs.end(); ++it)
+	{
+		if (it->first == ret)
+		{
+			return it->second;
+		}
+	}
+	return 0; //dummy val .. should always return a number
 }
