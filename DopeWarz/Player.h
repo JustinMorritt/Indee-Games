@@ -13,11 +13,14 @@ class Player
 public:
 	virtual int GetHealth() = 0;
 	virtual int GetMaxHealth() = 0;
+	virtual void SetHealth(int health) = 0;
 	virtual void DisplayStats(string name) = 0;
 	virtual unsigned GetBackpackSpace() = 0;
 	virtual unsigned GetUsedSpace() = 0;
 	virtual unsigned GetMoney() = 0;
 	virtual unsigned GetDebt() = 0;
+	virtual void SetMoney(unsigned money) = 0;
+	virtual void SetDebt(unsigned money) = 0;
 	virtual void IncreaseDebt() = 0;
 	virtual void Buy(Market& m) = 0;
 	virtual void Sell(Market& m) = 0;
@@ -42,8 +45,11 @@ public:
 	~SmartPlayer();
 	virtual int GetHealth(){ return m_Health; };
 	virtual int GetMaxHealth(){ return m_MaxHealth; };
+	virtual void SetHealth(int health){ m_Health = health; };
 	virtual unsigned GetMoney(){ return m_Money; };
 	virtual unsigned GetDebt() { return m_Debt; };
+	virtual void SetMoney(unsigned money){ m_Money = money; };
+	virtual void SetDebt(unsigned money){ m_Debt = money; };
 	virtual void IncreaseDebt();
 	virtual void DisplayStats(string name);
 	virtual unsigned GetBackpackSpace(){ return m_Backpack; };
@@ -79,9 +85,12 @@ public:
 	~TankyPlayer();
 	virtual int GetHealth(){ return m_Health; };
 	virtual int GetMaxHealth(){ return m_MaxHealth; };
+	virtual void SetHealth(int health){ m_Health = health; };
 	virtual void DisplayStats(string name);
 	virtual unsigned GetMoney(){ return m_Money; };
 	virtual unsigned GetDebt() { return m_Debt; };
+	virtual void SetMoney(unsigned money){ m_Money = money; };
+	virtual void SetDebt(unsigned money){ m_Debt = money; };
 	virtual void IncreaseDebt();
 	virtual unsigned GetBackpackSpace(){ return m_Backpack; };
 	virtual unsigned GetUsedSpace(){ return m_UsedSpace; };
@@ -115,8 +124,11 @@ public:
 	~QuickPlayer();
 	virtual int GetHealth(){ return m_Health; };
 	virtual int GetMaxHealth(){ return m_MaxHealth; };
+	virtual void SetHealth(int health){ m_Health = health; };
 	virtual unsigned GetMoney(){ return m_Money; };
 	virtual unsigned GetDebt() { return m_Debt; };
+	virtual void SetDebt(unsigned money){ m_Debt = money; };
+	virtual void SetMoney(unsigned money){ m_Money = money; };
 	virtual void IncreaseDebt();
 	virtual void DisplayStats(string name);
 	virtual unsigned GetBackpackSpace(){ return m_Backpack; };
@@ -151,8 +163,11 @@ public:
 	~DangerPlayer();
 	virtual int GetHealth(){ return m_Health; };
 	virtual int GetMaxHealth(){ return m_MaxHealth; };
+	virtual void SetHealth(int health){ m_Health = health; };
 	virtual unsigned GetMoney(){ return m_Money; };
 	virtual unsigned GetDebt() { return m_Debt; };
+	virtual void SetMoney(unsigned money){ m_Money = money; };
+	virtual void SetDebt(unsigned money){ m_Debt = money; };
 	virtual void DisplayStats(string name);
 	virtual void IncreaseDebt();
 	virtual unsigned GetBackpackSpace(){ return m_Backpack; };

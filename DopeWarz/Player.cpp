@@ -15,26 +15,26 @@ Player::~Player()
 
 
 SmartPlayer::SmartPlayer() :
-m_Health(100), m_Smarts(50), m_Armour(0), m_Money(5000.00), m_UsedSpace(0),
-m_Damage(0), m_Speed(0), m_Backpack(100), m_Debt(5000.00), m_MaxHealth(100)
+m_Health(100), m_Smarts(50), m_Armour(0), m_Money(5000), m_UsedSpace(0),
+m_Damage(0), m_Speed(0), m_Backpack(100), m_Debt(5000), m_MaxHealth(100)
 {
 
 }
 TankyPlayer::TankyPlayer():
-m_Health(150), m_Smarts(0), m_Armour(0), m_Money(5000.00), m_UsedSpace(0),
-m_Damage(0), m_Speed(0), m_Backpack(100), m_Debt(5000.00), m_MaxHealth(150)
+m_Health(150), m_Smarts(0), m_Armour(0), m_Money(5000), m_UsedSpace(0),
+m_Damage(0), m_Speed(0), m_Backpack(100), m_Debt(5000), m_MaxHealth(150)
 {
 
 }
 QuickPlayer::QuickPlayer():
-m_Health(100), m_Smarts(0), m_Armour(0), m_Money(5000.00), m_UsedSpace(0),
-m_Damage(0), m_Speed(50), m_Backpack(100), m_Debt(5000.00), m_MaxHealth(100)
+m_Health(100), m_Smarts(0), m_Armour(0), m_Money(5000), m_UsedSpace(0),
+m_Damage(0), m_Speed(50), m_Backpack(100), m_Debt(5000), m_MaxHealth(100)
 {
 
 }
 DangerPlayer::DangerPlayer():
-m_Health(100), m_Smarts(0), m_Armour(0), m_Money(5000.00), m_UsedSpace(0),
-m_Damage(50), m_Speed(0), m_Backpack(100), m_Debt(5000.00), m_MaxHealth(100)
+m_Health(100), m_Smarts(0), m_Armour(0), m_Money(5000), m_UsedSpace(0),
+m_Damage(50), m_Speed(0), m_Backpack(100), m_Debt(5000), m_MaxHealth(100)
 {
 
 }
@@ -134,7 +134,7 @@ void SmartPlayer::ShowBackpack()
 	{
 		for (vector<pair<string, pair<unsigned, unsigned>>>::iterator it = backpack.begin(); it != backpack.end(); ++it)
 		{
-			double totalVal = (it->second.first * it->second.second);
+			unsigned totalVal = (it->second.first * it->second.second);
 			cout << it->second.first << " " << it->first << " Units Bought at $" << it->second.second << " Total value:" << totalVal << endl;
 		}
 	}
@@ -162,8 +162,8 @@ void SmartPlayer::Buy(Market& m)
 	if (GetUsedSpace() != GetBackpackSpace())
 	{
 		cout << "How Many " << m.GetName(choice) << " Units Would you like to buy?  \n" << (GetBackpackSpace() - GetUsedSpace()) << " Backpack Space , (0) to go back.  \n";
-		int units = getLegitInt(0, (GetBackpackSpace() - GetUsedSpace()));
-		double purchaseVal = (units * m.GetPrice(choice));
+		unsigned units = getLegitInt(0, (GetBackpackSpace() - GetUsedSpace()));
+		unsigned purchaseVal = (units * m.GetPrice(choice));
 		bool bought = false;
 		while (!bought && units != 0)
 		{
@@ -214,7 +214,7 @@ void SmartPlayer::Sell(Market& m)
 		cout << "\n";
 		for (it ; it != backpack.end(); ++it)
 		{
-			double totalVal = (it->second.first * it->second.second);
+			unsigned totalVal = (it->second.first * it->second.second);
 			cout << "(" << i << ") " << it->second.first << " " << it->first << " Units Bought at $" << it->second.second << " Total value:" << totalVal << endl;
 			++i;
 		}

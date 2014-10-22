@@ -24,6 +24,10 @@ public:
 	void Play(string name, unsigned Class, unsigned days);
 	void DDay(Player * p){ --m_DaysLeft; p->IncreaseDebt(); };
 	int MoveLoacation() const;
+	void PayLoanShark(Player * p);
+	void GoToHospital(Player * p);
+
+
 	int getLegitInt(int low, int high) const;
 	string getLegitString() const;
 

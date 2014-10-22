@@ -196,13 +196,15 @@ void DopeWarz::Play(string name, unsigned Class, unsigned days)
 	bool quit = false;
 	bool showedStats = false;
 	bool changeLocation = false;
-	int Location = 0; int choice2 = 2; int choice = 2;
+	int Location = 0; 
 	while (p->GetHealth() != 0 && m_DaysLeft != 0 && quit == false)
 	{
+		int choice2 = 2; int choice = 2; int choice3 = 2; int choice4 = 2; int choice5 = 2; int choice6 = 2; int choice7 = 2;
 		Market market;
 		Market& m = market;
 		switch (Location)
 		{
+//***************************HOME*****************************************************************************************************************
 			case 0 :
 				while (choice != 0 && choice != 4 && m_DaysLeft != 0 && p->GetHealth() > 0)
 				{
@@ -248,7 +250,7 @@ void DopeWarz::Play(string name, unsigned Class, unsigned days)
 					}		
 				}
 				break;
-
+//***************************LOANSHARK*****************************************************************************************************************
 			case 1:
 				while (choice2 != 0 && choice2 != 4 && m_DaysLeft != 0 && p->GetHealth() > 0)
 				{
@@ -272,7 +274,7 @@ void DopeWarz::Play(string name, unsigned Class, unsigned days)
 						<< "(2) Sell !\n"
 						<< "(3) Show Stats\n"
 						<< "(4) Move Location (Current: Downtown Dundas)\n"
-						<< "(5) Loan Shark " << "Debt: $" << p->GetDebt() << "\n"
+						<< "(5) Loan Shark " << "  (Debt: $" << p->GetDebt() << ")\n"
 						<< "(0) Save & Quit\n";
 					choice2 = getLegitInt(0, 5);
 					switch (choice2)
@@ -290,13 +292,249 @@ void DopeWarz::Play(string name, unsigned Class, unsigned days)
 								p->Sell(m); DDay(p); system("cls"); break;
 							}
 
-					case 3:  p->DisplayStats(pname); system("cls"); showedStats = true; break;
+					case 3:  system("cls"); p->DisplayStats(pname); showedStats = true; break;
+					case 4:  Location = MoveLoacation(); system("cls"); changeLocation = true; DDay(p); break;
+					case 5: PayLoanShark(p); system("cls"); showedStats = true; break;
+					}
+				}
+				break;
+//***************************HOSPITAL*****************************************************************************************************************
+			case 2:
+				while (choice3 != 0 && choice3 != 4 && m_DaysLeft != 0 && p->GetHealth() > 0)
+				{
+					if (!showedStats){ m.BuildMarket(); }
+					m.DisplayMarket();
+					showedStats = false;
+					changeLocation = false;
+
+					cout << "\n\n*********************************************\n"
+						<< "*   BackPack: " << p->GetUsedSpace() << "/" << p->GetBackpackSpace() << " "
+						<< "    Health: " << p->GetHealth() << " / " << p->GetMaxHealth() << "   \n"
+						<< "*   Money: $" << p->GetMoney() << "";
+
+					if (p->GetDebt() != 0)
+					{
+						cout << "  -> Debt: $" << p->GetDebt() << "";
+					}
+					cout << "  Days: " << m_DaysLeft << "   "
+						<< "\n*********************************************\n\n";
+					cout << "(1) Buy !\n"
+						<< "(2) Sell !\n"
+						<< "(3) Show Stats\n"
+						<< "(4) Move Location (Current: Wellington St)\n"
+						<< "(5) Hospital\n"
+						<< "(0) Save & Quit\n";
+					choice3 = getLegitInt(0, 5);
+					switch (choice3)
+					{
+					case 0:	quit = true; break;
+					case 1:  p->Buy(m);  DDay(p); system("cls"); break;
+					case 2: if (p->GetUsedSpace() == 0)
+					{
+								system("cls");
+								showedStats = true;
+								break;
+					}
+							else
+							{
+								p->Sell(m); DDay(p); system("cls"); break;
+							}
+
+					case 3:  system("cls"); p->DisplayStats(pname); showedStats = true; break;
+					case 4:  Location = MoveLoacation(); system("cls"); changeLocation = true; DDay(p); break;
+					case 5: GoToHospital(p); system("cls"); showedStats = true; break;
+					}
+				}
+				break;
+//****************************BANK****************************************************************************************************************
+			case 3:
+				while (choice4 != 0 && choice4 != 4 && m_DaysLeft != 0 && p->GetHealth() > 0)
+				{
+					if (!showedStats){ m.BuildMarket(); }
+					m.DisplayMarket();
+					showedStats = false;
+					changeLocation = false;
+
+					cout << "\n\n*********************************************\n"
+						<< "*   BackPack: " << p->GetUsedSpace() << "/" << p->GetBackpackSpace() << " "
+						<< "    Health: " << p->GetHealth() << " / " << p->GetMaxHealth() << "   \n"
+						<< "*   Money: $" << p->GetMoney() << "";
+
+					if (p->GetDebt() != 0)
+					{
+						cout << "  -> Debt: $" << p->GetDebt() << "";
+					}
+					cout << "  Days: " << m_DaysLeft << "   "
+						<< "\n*********************************************\n\n";
+					cout << "(1) Buy !\n"
+						<< "(2) Sell !\n"
+						<< "(3) Show Stats\n"
+						<< "(4) Move Location (Current: Richmond Row)\n"
+						<< "(5) Bank\n"
+						<< "(0) Save & Quit\n";
+					choice4 = getLegitInt(0, 5);
+					switch (choice4)
+					{
+					case 0:	quit = true; break;
+					case 1:  p->Buy(m);  DDay(p); system("cls"); break;
+					case 2: if (p->GetUsedSpace() == 0)
+					{
+								system("cls");
+								showedStats = true;
+								break;
+					}
+							else
+							{
+								p->Sell(m); DDay(p); system("cls"); break;
+							}
+
+					case 3:  system("cls"); p->DisplayStats(pname); showedStats = true; break;
 					case 4:  Location = MoveLoacation(); system("cls"); changeLocation = true; DDay(p); break;
 					}
 				}
 				break;
+//****************************GUNTRADER****************************************************************************************************************
+			case 4:
+				while (choice5 != 0 && choice5 != 4 && m_DaysLeft != 0 && p->GetHealth() > 0)
+				{
+					if (!showedStats){ m.BuildMarket(); }
+					m.DisplayMarket();
+					showedStats = false;
+					changeLocation = false;
 
-				//INSERT LOCATIONS HERE
+					cout << "\n\n*********************************************\n"
+						<< "*   BackPack: " << p->GetUsedSpace() << "/" << p->GetBackpackSpace() << " "
+						<< "    Health: " << p->GetHealth() << " / " << p->GetMaxHealth() << "   \n"
+						<< "*   Money: $" << p->GetMoney() << "";
+
+					if (p->GetDebt() != 0)
+					{
+						cout << "  -> Debt: $" << p->GetDebt() << "";
+					}
+					cout << "  Days: " << m_DaysLeft << "   "
+						<< "\n*********************************************\n\n";
+					cout << "(1) Buy !\n"
+						<< "(2) Sell !\n"
+						<< "(3) Show Stats\n"
+						<< "(4) Move Location (Current: White Oaks Parking Lot)\n"
+						<< "(5) Gun Trader\n"
+						<< "(0) Save & Quit\n";
+					choice5 = getLegitInt(0, 5);
+					switch (choice5)
+					{
+					case 0:	quit = true; break;
+					case 1:  p->Buy(m);  DDay(p); system("cls"); break;
+					case 2: if (p->GetUsedSpace() == 0)
+					{
+								system("cls");
+								showedStats = true;
+								break;
+					}
+							else
+							{
+								p->Sell(m); DDay(p); system("cls"); break;
+							}
+
+					case 3:  system("cls"); p->DisplayStats(pname); showedStats = true; break;
+					case 4:  Location = MoveLoacation(); system("cls"); changeLocation = true; DDay(p); break;
+					}
+				}
+				break;
+//****************************LIBRARY****************************************************************************************************************
+			case 5:
+while (choice6 != 0 && choice6 != 4 && m_DaysLeft != 0 && p->GetHealth() > 0)
+				{
+					if (!showedStats){ m.BuildMarket(); }
+					m.DisplayMarket();
+					showedStats = false;
+					changeLocation = false;
+
+					cout << "\n\n*********************************************\n"
+						<< "*   BackPack: " << p->GetUsedSpace() << "/" << p->GetBackpackSpace() << " "
+						<< "    Health: " << p->GetHealth() << " / " << p->GetMaxHealth() << "   \n"
+						<< "*   Money: $" << p->GetMoney() << "";
+
+					if (p->GetDebt() != 0)
+					{
+						cout << "  -> Debt: $" << p->GetDebt() << "";
+					}
+					cout << "  Days: " << m_DaysLeft << "   "
+						<< "\n*********************************************\n\n";
+					cout << "(1) Buy !\n"
+						<< "(2) Sell !\n"
+						<< "(3) Show Stats\n"
+						<< "(4) Move Location (Current: Library)\n"
+						<< "(5) Improve Stats\n"
+						<< "(0) Save & Quit\n";
+					choice6 = getLegitInt(0, 5);
+					switch (choice6)
+					{
+					case 0:	quit = true; break;
+					case 1:  p->Buy(m);  DDay(p); system("cls"); break;
+					case 2: if (p->GetUsedSpace() == 0)
+					{
+								system("cls");
+								showedStats = true;
+								break;
+					}
+							else
+							{
+								p->Sell(m); DDay(p); system("cls"); break;
+							}
+
+					case 3:  system("cls"); p->DisplayStats(pname); showedStats = true; break;
+					case 4:  Location = MoveLoacation(); system("cls"); changeLocation = true; DDay(p); break;
+					}
+				}
+				break;
+//****************************GYM****************************************************************************************************************
+			case 6:
+	while (choice7 != 0 && choice7 != 4 && m_DaysLeft != 0 && p->GetHealth() > 0)
+				{
+					if (!showedStats){ m.BuildMarket(); }
+					m.DisplayMarket();
+					showedStats = false;
+					changeLocation = false;
+
+					cout << "\n\n*********************************************\n"
+						<< "*   BackPack: " << p->GetUsedSpace() << "/" << p->GetBackpackSpace() << " "
+						<< "    Health: " << p->GetHealth() << " / " << p->GetMaxHealth() << "   \n"
+						<< "*   Money: $" << p->GetMoney() << "";
+
+					if (p->GetDebt() != 0)
+					{
+						cout << "  -> Debt: $" << p->GetDebt() << "";
+					}
+					cout << "  Days: " << m_DaysLeft << "   "
+						<< "\n*********************************************\n\n";
+					cout << "(1) Buy !\n"
+						<< "(2) Sell !\n"
+						<< "(3) Show Stats\n"
+						<< "(4) Move Location (Current: GoodLife)\n"
+						<< "(5) Hit the Gym!  (Get Ripped)\n"
+						<< "(0) Save & Quit\n";
+					choice7 = getLegitInt(0, 5);
+					switch (choice7)
+					{
+					case 0:	quit = true; break;
+					case 1:  p->Buy(m);  DDay(p); system("cls"); break;
+					case 2: if (p->GetUsedSpace() == 0)
+					{
+								system("cls");
+								showedStats = true;
+								break;
+					}
+							else
+							{
+								p->Sell(m); DDay(p); system("cls"); break;
+							}
+
+					case 3:  system("cls"); p->DisplayStats(pname); showedStats = true; break;
+					case 4:  Location = MoveLoacation(); system("cls"); changeLocation = true; DDay(p); break;
+					}
+				}
+				break;
+//********************************************************************************************************************************************
 		}
 	}
 }
@@ -353,17 +591,125 @@ int DopeWarz::MoveLoacation() const
 		 << "(6) GoodLife			(Get Buffer)\n"
 		 << "(0) Go home			(Safe House)\n";
 	choice = getLegitInt(0, 6);
+	return choice;
+}
+
+void DopeWarz::PayLoanShark(Player * p)
+{
+	int choice;
+	cout << "\nWhat u Gone do?\n"
+		<< "(1) Pay Loan\n"
+		<< "(2) Take Loan\n"
+		<< "(3) Leave\n";
+		choice = getLegitInt(1, 3);
+		switch (choice)
+		{
+		case 1:
+			if (p->GetDebt() == 0)
+			{
+				cout << "\nYou aint got a Loan!\n";
+				system("pause");
+				break;
+			}
+			if (p->GetDebt() > p->GetMoney())
+			{
+				cout << "\nYou aint got " << p->GetDebt() << " Moron! Get outtta Here!\n";
+				system("pause");
+			}
+			else
+			{
+				cout << "\nThanks , you can keep your dog and your legs!\n";
+				int ret = p->GetMoney();
+				ret -= p->GetDebt();
+				p->SetDebt(0);
+				p->SetMoney(ret);
+				system("pause");
+			}
+			
+			break;
+		case 2: 
+			if (p->GetDebt() == 0)
+			{
+				cout << "\nYou Wanna Take a Loan Eh??\n"
+					<< "(1) Yes ($20 000 Max)\n"
+					<< "(2) Leave\n";
+				int choice = getLegitInt(1,2);
+				if (choice == 1)
+				{
+					cout << "\nHow Much? (no spaces)\n";
+					int choice2 = getLegitInt(1, 20000);
+					p->SetDebt(choice2);
+					cout << "\nEnjoy The $\n" << choice2 << " ,Pay back soon or youll regret it! \n";
+					system("pause");
+					break;
+				}
+				else
+				{
+					break;
+				}
+		
+			}
+			else
+			{
+				cout << "\nYou Already Have a loan ..Pay me back first Foo!\n";
+				system("pause");
+				break;
+			}
+			
+			
+			break;
+		case 3: break;
+		}
+
+}
+
+void DopeWarz::GoToHospital(Player * p)
+{
+	//heal rate ....    20 / HP 20 * 100 =  2 Grand for full HP
+	int choice;
+	cout << "\nWelcome to the hospital!\n"
+		<< "(1) Heal Up!\n"
+		<< "(2) Leave\n";
+	choice = getLegitInt(1, 2);
 	switch (choice)
 	{
-	case 0:return 0; 
-	case 1:return 1; 
-	case 2:return 2; 
-	case 3:return 3; 
-	case 4:return 4;
-	case 5:return 5;
-	case 6:return 6; 
+	case 1:
+		if (p->GetHealth() == p->GetMaxHealth())
+		{
+			cout << "\nYou Already Have full health !\n";
+			system("pause");
+			break;
+		}
+		else
+		{
+			int hpHealed = (p->GetMaxHealth() - p->GetHealth());
+			unsigned cost = (hpHealed * 20);
+			unsigned money = p->GetMoney();
+			if((money - cost) < 0)
+			{
+				cout << "\nNot Enough Money...we arnt touching you ! \n"
+					<< "Come back when you have $" << cost << " atleast! cheapskate!\n";
+				system("pause");
+				break;
+			}
+			else
+			{
+			unsigned totalcost = (money - cost);
+			p->SetMoney(totalcost);
+			p->SetHealth(p->GetMaxHealth());
+			cout << "\nHealed you for " << hpHealed << " , costing you $" << cost << ". \n";
+			system("pause");
+			break;
+			}
+	
+		}
+		break;
+	case 2: break;
 	}
-	return 0;
+
+
+
+
 }
 
 
