@@ -7,7 +7,7 @@
 
 
 
-DopeWarz::DopeWarz()
+DopeWarz::DopeWarz() : m_BankMoney(0)
 {
 	LoadUsers();
 
@@ -390,6 +390,7 @@ void DopeWarz::Play(string name, unsigned Class, unsigned days)
 
 					case 3:  system("cls"); p->DisplayStats(pname); showedStats = true; break;
 					case 4:  Location = MoveLoacation(); system("cls"); changeLocation = true; DDay(p); break;
+					case 5: UseBank(p); system("cls"); showedStats = true; break;
 					}
 				}
 				break;
@@ -710,6 +711,66 @@ void DopeWarz::GoToHospital(Player * p)
 
 
 
+}
+
+void DopeWarz::UseBank(Player * p)
+{
+	int choice;
+	cout << "\nWelcome to the bank!\n"
+		<< "(1) Deposit\n"
+		<< "(2) Withdrawl\n"
+		<< "(3) Leave\n";
+	choice = getLegitInt(1, 3);
+	switch (choice)
+	{
+	case 1: 
+		if (p->GetMoney() == 0)
+		{
+			cout << "\nNo Money!\n";
+			system("pause");
+			break;
+		}
+		else
+		{
+			cout << "\nHow Much?\n";
+			unsigned money = getLegitInt(1, p->GetMoney());
+			unsigned bank = GetBank();
+			unsigned ret = (money + bank);
+			unsigned pmoney = p->GetMoney();
+			unsigned pret = (pmoney - money);
+			p->SetMoney(pret);
+			SetBank(ret);
+			cout << "\nDeposited $" << money << "\n";
+			system("pause");
+			break;
+		}
+		break;
+	case 2:
+		if (GetBank() == 0)
+		{
+			cout << "\nNothing in your Bank Stupid!\n";
+			system("pause");
+			break;
+		}
+		else
+		{
+			cout << "\nHow Much you want? (Currently $" << GetBank() << " )\n";
+			unsigned money = getLegitInt(1, GetBank());
+			unsigned bank = GetBank();
+			unsigned ret = (bank - money);
+			unsigned pmoney = p->GetMoney();
+			unsigned pret = (pmoney + money);
+			p->SetMoney(pret);
+			SetBank(ret);
+			cout << "\nWithdrew $" << money << "\n";
+			system("pause");
+			break;
+		}
+		
+		
+		break;
+	case 3: break;
+	}
 }
 
 

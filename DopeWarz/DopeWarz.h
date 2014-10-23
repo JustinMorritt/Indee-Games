@@ -26,12 +26,16 @@ public:
 	int MoveLoacation() const;
 	void PayLoanShark(Player * p);
 	void GoToHospital(Player * p);
+	void UseBank(Player * p);
+	void SetBank(unsigned money){ m_BankMoney = money; };
+	unsigned GetBank() const{ return m_BankMoney; };
 
 
 	int getLegitInt(int low, int high) const;
 	string getLegitString() const;
 
 private:
+	unsigned m_BankMoney;
 	unsigned m_DaysLeft;
 	Player * m_Player;
 
