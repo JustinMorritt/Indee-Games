@@ -24,8 +24,10 @@ public:
 	void Play(string name, unsigned Class, unsigned days);
 	void DDay(Player * p){ --m_DaysLeft; p->IncreaseDebt(); };
 	int MoveLoacation() const;
+
 	void PayLoanShark(Player * p);
 	void GoToHospital(Player * p);
+	void BuyGuns(Player * p);
 	void UseBank(Player * p);
 	void SetBank(unsigned money){ m_BankMoney = money; };
 	unsigned GetBank() const{ return m_BankMoney; };
@@ -48,9 +50,6 @@ private:
 	map<double, pair<int, string>> m_LB160;
 
 };
-
-
-
 
 
 #endif

@@ -245,7 +245,7 @@ void DopeWarz::Play(string name, unsigned Class, unsigned days)
 									p->Sell(m); DDay(p); system("cls"); break;
 								}
 							
-						case 3: system("cls"); p->DisplayStats(pname); showedStats = true; break;
+						case 3:  p->DisplayStats(pname); system("pause"); system("cls"); showedStats = true; break;
 						case 4:  Location = MoveLoacation(); system("cls"); changeLocation = true;  DDay(p); break;
 					}		
 				}
@@ -292,7 +292,7 @@ void DopeWarz::Play(string name, unsigned Class, unsigned days)
 								p->Sell(m); DDay(p); system("cls"); break;
 							}
 
-					case 3:  system("cls"); p->DisplayStats(pname); showedStats = true; break;
+					case 3:  p->DisplayStats(pname); system("pause"); system("cls"); showedStats = true; break;
 					case 4:  Location = MoveLoacation(); system("cls"); changeLocation = true; DDay(p); break;
 					case 5: PayLoanShark(p); system("cls"); showedStats = true; break;
 					}
@@ -340,7 +340,7 @@ void DopeWarz::Play(string name, unsigned Class, unsigned days)
 								p->Sell(m); DDay(p); system("cls"); break;
 							}
 
-					case 3:  system("cls"); p->DisplayStats(pname); showedStats = true; break;
+					case 3:  p->DisplayStats(pname); system("pause"); system("cls"); showedStats = true; break;
 					case 4:  Location = MoveLoacation(); system("cls"); changeLocation = true; DDay(p); break;
 					case 5: GoToHospital(p); system("cls"); showedStats = true; break;
 					}
@@ -388,7 +388,7 @@ void DopeWarz::Play(string name, unsigned Class, unsigned days)
 								p->Sell(m); DDay(p); system("cls"); break;
 							}
 
-					case 3:  system("cls"); p->DisplayStats(pname); showedStats = true; break;
+					case 3:  p->DisplayStats(pname); system("pause"); system("cls"); showedStats = true; break;
 					case 4:  Location = MoveLoacation(); system("cls"); changeLocation = true; DDay(p); break;
 					case 5: UseBank(p); system("cls"); showedStats = true; break;
 					}
@@ -436,8 +436,9 @@ void DopeWarz::Play(string name, unsigned Class, unsigned days)
 								p->Sell(m); DDay(p); system("cls"); break;
 							}
 
-					case 3:  system("cls"); p->DisplayStats(pname); showedStats = true; break;
+					case 3:  p->DisplayStats(pname); system("pause"); system("cls"); showedStats = true; break;
 					case 4:  Location = MoveLoacation(); system("cls"); changeLocation = true; DDay(p); break;
+					case 5: BuyGuns(p); system("cls"); showedStats = true; break;
 					}
 				}
 				break;
@@ -483,7 +484,7 @@ while (choice6 != 0 && choice6 != 4 && m_DaysLeft != 0 && p->GetHealth() > 0)
 								p->Sell(m); DDay(p); system("cls"); break;
 							}
 
-					case 3:  system("cls"); p->DisplayStats(pname); showedStats = true; break;
+					case 3:  p->DisplayStats(pname); system("pause"); system("cls"); showedStats = true; break;
 					case 4:  Location = MoveLoacation(); system("cls"); changeLocation = true; DDay(p); break;
 					}
 				}
@@ -530,7 +531,7 @@ while (choice6 != 0 && choice6 != 4 && m_DaysLeft != 0 && p->GetHealth() > 0)
 								p->Sell(m); DDay(p); system("cls"); break;
 							}
 
-					case 3:  system("cls"); p->DisplayStats(pname); showedStats = true; break;
+					case 3:  p->DisplayStats(pname); system("pause"); system("cls"); showedStats = true; break;
 					case 4:  Location = MoveLoacation(); system("cls"); changeLocation = true; DDay(p); break;
 					}
 				}
@@ -541,44 +542,7 @@ while (choice6 != 0 && choice6 != 4 && m_DaysLeft != 0 && p->GetHealth() > 0)
 }
 
 
-int DopeWarz::getLegitInt(int low, int high) const
-{
-	int ret;
-	do
-	{
-		std::string str;
-		std::getline(std::cin, str);
-		std::stringstream ss(str);
-		ss >> ret;
-		if ((ss) && (ret >= low && ret <= high))
-		{
-			break;
-		}
-		else
-		{
-			std::cout << "-<error>--wrong option--choose(" << low << " - " << high << ")--" << std::endl;
-			continue;
-		}
-	} while (true);
-	return ret;
-};
 
-string DopeWarz::getLegitString() const
-{
-	string ret;
-	do
-	{
-		std::string str;
-		std::getline(std::cin, str);
-		std::stringstream ss(str);
-		ss >> ret;
-		if ((ss))
-		{
-			break;
-		}
-	} while (true);
-	return ret;
-}
 
 
 int DopeWarz::MoveLoacation() const
@@ -639,8 +603,10 @@ void DopeWarz::PayLoanShark(Player * p)
 				{
 					cout << "\nHow Much? (no spaces)\n";
 					int choice2 = getLegitInt(1, 20000);
+					unsigned pMoney = p->GetMoney();
+					p->SetMoney(pMoney + choice2);
 					p->SetDebt(choice2);
-					cout << "\nEnjoy The $\n" << choice2 << " ,Pay back soon or youll regret it! \n";
+					cout << "\nEnjoy The $" << choice2 << " ,Pay back soon or youll regret it! \n";
 					system("pause");
 					break;
 				}
@@ -716,9 +682,10 @@ void DopeWarz::GoToHospital(Player * p)
 void DopeWarz::UseBank(Player * p)
 {
 	int choice;
+	unsigned inBank = GetBank();
 	cout << "\nWelcome to the bank!\n"
 		<< "(1) Deposit\n"
-		<< "(2) Withdrawl\n"
+		<< "(2) Withdrawl ($" << inBank << ")\n"
 		<< "(3) Leave\n";
 	choice = getLegitInt(1, 3);
 	switch (choice)
@@ -733,7 +700,7 @@ void DopeWarz::UseBank(Player * p)
 		else
 		{
 			cout << "\nHow Much?\n";
-			unsigned money = getLegitInt(1, p->GetMoney());
+			unsigned money = getLegitInt(0, p->GetMoney());
 			unsigned bank = GetBank();
 			unsigned ret = (money + bank);
 			unsigned pmoney = p->GetMoney();
@@ -754,7 +721,7 @@ void DopeWarz::UseBank(Player * p)
 		}
 		else
 		{
-			cout << "\nHow Much you want? (Currently $" << GetBank() << " )\n";
+			cout << "\nHow Much you want? (Currently $" << GetBank() << ")\n";
 			unsigned money = getLegitInt(1, GetBank());
 			unsigned bank = GetBank();
 			unsigned ret = (bank - money);
@@ -766,13 +733,399 @@ void DopeWarz::UseBank(Player * p)
 			system("pause");
 			break;
 		}
-		
-		
 		break;
 	case 3: break;
 	}
 }
 
+void DopeWarz::BuyGuns(Player * p)
+{
+	int choice, choice2;
+	cout << "\nLooking to buy a gun eh?!\n"
+		<< "(1) Buy\n"
+		<< "(2) Leave\n";
+	choice = getLegitInt(1, 2);
+	switch (choice)
+	{
+	case 1:
+		if (p->GetMoney() < 500)
+		{
+			cout << "\nYou are too poor to even look at guns, \n get outta here ya bum! (atleast 500$ to ur name)\n";
+			system("pause");
+			break;
+		}
+		else
+		{
+			cout << "\nWhat Type?!\n"
+				<< "(1) Pistols ($500 - $1000)\n"
+				<< "(2) Machine Guns ($1250 - $3000)\n"
+				<< "(3) Snipers ($3500 - $5000)\n";
+			choice2 = getLegitInt(1, 3);
+
+			switch (choice2)
+			{
+			case 1: 
+				while (true)
+				{
+//***************************************************************************************************************************
+					system("cls");
+					cout << "\n\t PISTOL 1 !\n\n";
+
+					//PIC HERE
+
+					cout << "\nBuy This?!\n"
+						<< "(1) Yes ($500)\n"
+						<< "(2) Next! \n"
+						<< "(3) Leave \n";
+					choice = getLegitInt(1, 3);
+					if (choice == 3){ break; }
+					if (choice == 1)
+					{
+						//BUY
+						cout << "\nThanks for Buying Pistol1 \n";
+						system("pause");
+						break;
+					}
+//***************************************************************************************************************************
+					system("cls");
+					cout << "\n\t PISTOL 2 !\n\n";
+
+					//PIC HERE
+
+					cout << "\nBuy This?!\n"
+						<< "(1) Yes ($650)\n"
+						<< "(2) Next! \n"
+						<< "(3) Leave \n";
+					choice = getLegitInt(1, 3);
+					if (choice == 3){ break; }
+					if (choice == 1)
+					{
+						//BUY
+						cout << "\nThanks for Buying Pistol2 \n";
+						system("pause");
+						break;
+					}
+//***************************************************************************************************************************
+					system("cls");
+					cout << "\n\t PISTOL 3 !\n\n";
+
+					//PIC HERE
+
+					cout << "\nBuy This?!\n"
+						<< "(1) Yes ($750)\n"
+						<< "(2) Next! \n"
+						<< "(3) Leave \n";
+					choice = getLegitInt(1, 3);
+					if (choice == 3){ break; }
+					if (choice == 1)
+					{
+						//BUY
+						cout << "\nThanks for Buying Pistol3 \n";
+						system("pause");
+						break;
+					}
+//***************************************************************************************************************************
+					system("cls");
+					cout << "\n\t PISTOL 4 !\n\n";
+
+					//PIC HERE
+
+					cout << "\nBuy This?!\n"
+						<< "(1) Yes ($800)\n"
+						<< "(2) Next! \n"
+						<< "(3) Leave \n";
+					choice = getLegitInt(1, 3);
+					if (choice == 3){ break; }
+					if (choice == 1)
+					{
+						//BUY
+						cout << "\nThanks for Buying Pistol4 \n";
+						system("pause");
+						break;
+					}
+//***************************************************************************************************************************
+					system("cls");
+					cout << "\n\t PISTOL 5 !\n\n";
+
+					//PIC HERE
+
+					cout << "\nBuy This?!\n"
+						<< "(1) Yes ($900)\n"
+						<< "(2) Next! \n"
+						<< "(3) Leave \n";
+					choice = getLegitInt(1, 3);
+					if (choice == 3){ break; }
+					if (choice == 1)
+					{
+						//BUY
+						cout << "\nThanks for Buying Pistol5 \n";
+						system("pause");
+						break;
+					}
+//***************************************************************************************************************************
+					system("cls");
+					cout << "\n\t PISTOL 6 !\n\n";
+
+					//PIC HERE
+
+					cout << "\nBuy This?!\n"
+						<< "(1) Yes ($1000)\n"
+						<< "(2) Next! \n"
+						<< "(3) Leave \n";
+					choice = getLegitInt(1, 3);
+					if (choice == 3){ break; }
+					if (choice == 1)
+					{
+						//BUY
+						cout << "\nThanks for Buying Pistol6 \n";
+						system("pause");
+						break;
+					}
+//***************************************************************************************************************************
+				} // <---While loop end..
+				break;
+
+			case 2:
+				while (true)
+				{
+//***************************************************************************************************************************
+					system("cls");
+					cout << "\n\t MachineGuns1 !\n\n";
+
+					//PIC HERE
+
+					cout << "\nBuy This?!\n"
+						<< "(1) Yes ($1250)\n"
+						<< "(2) Next! \n"
+						<< "(3) Leave \n";
+					choice = getLegitInt(1, 3);
+					if (choice == 3){ break; }
+					if (choice == 1)
+					{
+						//BUY
+						cout << "\nThanks for Buying MachineGuns1 \n";
+						system("pause");
+						break;
+					}
+//***************************************************************************************************************************
+					system("cls");
+					cout << "\n\t MachineGuns2 !\n\n";
+
+					//PIC HERE
+
+					cout << "\nBuy This?!\n"
+						<< "(1) Yes ($1500)\n"
+						<< "(2) Next! \n"
+						<< "(3) Leave \n";
+					choice = getLegitInt(1, 3);
+					if (choice == 3){ break; }
+					if (choice == 1)
+					{
+						//BUY
+						cout << "\nThanks for Buying MachineGuns2 \n";
+						system("pause");
+						break;
+					}
+//***************************************************************************************************************************
+					system("cls");
+					cout << "\n\t MachineGuns3 !\n\n";
+
+					//PIC HERE
+
+					cout << "\nBuy This?!\n"
+						<< "(1) Yes ($1750)\n"
+						<< "(2) Next! \n"
+						<< "(3) Leave \n";
+					choice = getLegitInt(1, 3);
+					if (choice == 3){ break; }
+					if (choice == 1)
+					{
+						//BUY
+						cout << "\nThanks for Buying MachineGuns3 \n";
+						system("pause");
+						break;
+					}
+//***************************************************************************************************************************
+					system("cls");
+					cout << "\n\t MachineGuns4 !\n\n";
+
+					//PIC HERE
+
+					cout << "\nBuy This?!\n"
+						<< "(1) Yes ($2250)\n"
+						<< "(2) Next! \n"
+						<< "(3) Leave \n";
+					choice = getLegitInt(1, 3);
+					if (choice == 3){ break; }
+					if (choice == 1)
+					{
+						//BUY
+						cout << "\nThanks for Buying MachineGuns4 \n";
+						system("pause");
+						break;
+					}
+//***************************************************************************************************************************
+					system("cls");
+					cout << "\n\t MachineGuns5 !\n\n";
+
+					//PIC HERE
+
+					cout << "\nBuy This?!\n"
+						<< "(1) Yes ($2500)\n"
+						<< "(2) Next! \n"
+						<< "(3) Leave \n";
+					choice = getLegitInt(1, 3);
+					if (choice == 3){ break; }
+					if (choice == 1)
+					{
+						//BUY
+						cout << "\nThanks for Buying MachineGuns5 \n";
+						system("pause");
+						break;
+					}
+//***************************************************************************************************************************
+					system("cls");
+					cout << "\n\t MachineGuns6 !\n\n";
+
+					//PIC HERE
+
+					cout << "\nBuy This?!\n"
+						<< "(1) Yes ($3000)\n"
+						<< "(2) Next! \n"
+						<< "(3) Leave \n";
+					choice = getLegitInt(1, 3);
+					if (choice == 3){ break; }
+					if (choice == 1)
+					{
+						//BUY
+						cout << "\nThanks for Buying MachineGuns6 \n";
+						system("pause");
+						break;
+					}
+//***************************************************************************************************************************
+				} // <---While loop end..
+				break;
+
+			case 3:
+				while (true)
+				{
+//***************************************************************************************************************************
+					system("cls");
+					cout << "\n\t Snipers1 !\n\n";
+
+					//PIC HERE
+
+					cout << "\nBuy This?!\n"
+						<< "(1) Yes ($1250)\n"
+						<< "(2) Next! \n"
+						<< "(3) Leave \n";
+					choice = getLegitInt(1, 3);
+					if (choice == 3){ break; }
+					if (choice == 1)
+					{
+						//BUY
+						cout << "\nThanks for Buying Snipers1 \n";
+						system("pause");
+						break;
+					}
+//***************************************************************************************************************************
+					system("cls");
+					cout << "\n\t Snipers2 !\n\n";
+
+					//PIC HERE
+
+					cout << "\nBuy This?!\n"
+						<< "(1) Yes ($1500)\n"
+						<< "(2) Next! \n"
+						<< "(3) Leave \n";
+					choice = getLegitInt(1, 3);
+					if (choice == 3){ break; }
+					if (choice == 1)
+					{
+						//BUY
+						cout << "\nThanks for Buying Snipers2 \n";
+						system("pause");
+						break;
+					}
+//***************************************************************************************************************************
+					system("cls");
+					cout << "\n\t Snipers2 !\n\n";
+
+					//PIC HERE
+
+					cout << "\nBuy This?!\n"
+						<< "(1) Yes ($1750)\n"
+						<< "(2) Next! \n"
+						<< "(3) Leave \n";
+					choice = getLegitInt(1, 3);
+					if (choice == 3){ break; }
+					if (choice == 1)
+					{
+						//BUY
+						cout << "\nThanks for Buying Snipers2 \n";
+						system("pause");
+						break;
+					}
+//***************************************************************************************************************************
+					//if more snipers...
+//***************************************************************************************************************************
+				} // <---While loop end..
+				break;
+
+
+			}//<----End of Gun Type Switch
+
+		}
+		break;
+	case 2: break;
+	}
+
+
+
+}
+
+
+
+
+
+int DopeWarz::getLegitInt(int low, int high) const
+{
+	int ret;
+	do
+	{
+		std::string str;
+		std::getline(std::cin, str);
+		std::stringstream ss(str);
+		ss >> ret;
+		if ((ss) && (ret >= low && ret <= high))
+		{
+			break;
+		}
+		else
+		{
+			std::cout << "-<error>--wrong option--choose(" << low << " - " << high << ")--" << std::endl;
+			continue;
+		}
+	} while (true);
+	return ret;
+};
+
+string DopeWarz::getLegitString() const
+{
+	string ret;
+	do
+	{
+		std::string str;
+		std::getline(std::cin, str);
+		std::stringstream ss(str);
+		ss >> ret;
+		if ((ss))
+		{
+			break;
+		}
+	} while (true);
+	return ret;
+}
 
 void DopeWarz::GameTitle() const
 {

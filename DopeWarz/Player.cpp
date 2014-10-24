@@ -141,15 +141,39 @@ void SmartPlayer::ShowBackpack()
 }
 void TankyPlayer::ShowBackpack()
 {
-
+	vector<pair<string, pair<unsigned, unsigned>>>& backpack = GetSack();
+	if (backpack.size() != 0)
+	{
+		for (vector<pair<string, pair<unsigned, unsigned>>>::iterator it = backpack.begin(); it != backpack.end(); ++it)
+		{
+			unsigned totalVal = (it->second.first * it->second.second);
+			cout << it->second.first << " " << it->first << " Units Bought at $" << it->second.second << " Total value:" << totalVal << endl;
+		}
+	}
 }
 void QuickPlayer::ShowBackpack()
 {
-
+	vector<pair<string, pair<unsigned, unsigned>>>& backpack = GetSack();
+	if (backpack.size() != 0)
+	{
+		for (vector<pair<string, pair<unsigned, unsigned>>>::iterator it = backpack.begin(); it != backpack.end(); ++it)
+		{
+			unsigned totalVal = (it->second.first * it->second.second);
+			cout << it->second.first << " " << it->first << " Units Bought at $" << it->second.second << " Total value:" << totalVal << endl;
+		}
+	}
 }
 void DangerPlayer::ShowBackpack()
 {
-
+	vector<pair<string, pair<unsigned, unsigned>>>& backpack = GetSack();
+	if (backpack.size() != 0)
+	{
+		for (vector<pair<string, pair<unsigned, unsigned>>>::iterator it = backpack.begin(); it != backpack.end(); ++it)
+		{
+			unsigned totalVal = (it->second.first * it->second.second);
+			cout << it->second.first << " " << it->first << " Units Bought at $" << it->second.second << " Total value:" << totalVal << endl;
+		}
+	}
 }
 
 
@@ -257,32 +281,322 @@ void SmartPlayer::Sell(Market& m)
 
 }
 
+
+
 void TankyPlayer::Buy(Market& m)
 {
+	vector<pair<string, unsigned>>& market = m.GetMap();
+	cout << "\nWhat are you looking to buy? 'type (number) in'\n";
+	int choice = getLegitInt(1, market.size());
 
+	if (GetUsedSpace() != GetBackpackSpace())
+	{
+		cout << "How Many " << m.GetName(choice) << " Units Would you like to buy?  \n" << (GetBackpackSpace() - GetUsedSpace()) << " Backpack Space , (0) to go back.  \n";
+		unsigned units = getLegitInt(0, (GetBackpackSpace() - GetUsedSpace()));
+		unsigned purchaseVal = (units * m.GetPrice(choice));
+		bool bought = false;
+		while (!bought && units != 0)
+		{
+			if (units != 0 && units <= (GetBackpackSpace() - GetUsedSpace()))
+			{
+
+				while (!bought && units != 0)
+				{
+					if (purchaseVal <= GetMoney())
+					{
+						bought = true;
+						FillSack(units);
+						// pair<string, pair<unsigned, unsigned>>
+						m_Product.push_back(make_pair(m.GetName(choice), make_pair(units, m.GetPrice(choice))));
+						m_Money -= purchaseVal;
+						cout << "\nBought " << units << " " << m.GetName(choice) << " Units .\n";
+						system("pause");
+						break;
+					}
+					else
+					{
+						cout << "\nYou Aint Got $" << purchaseVal << " try again or...(0) to go back fool\n";
+						units = getLegitInt(0, (GetBackpackSpace() - GetUsedSpace()));
+						purchaseVal = (units * m.GetPrice(choice));
+					}
+				}
+			}
+			else if (units > (GetBackpackSpace() - GetUsedSpace()))
+			{
+				cout << "\nNot enought space..\n";
+				system("pause");
+			}
+		}
+	}
+	else if (GetUsedSpace() == GetBackpackSpace())
+	{
+		cout << "\n\n NO SPACE LEFT ! \n";
+		system("pause");
+	}
 }
 void TankyPlayer::Sell(Market& m)
 {
+	vector<pair<string, pair<unsigned, unsigned>>>& backpack = GetSack();
+	if (backpack.size() != 0)
+	{
+		int i = 1;
+		vector<pair<string, pair<unsigned, unsigned>>>::iterator it = backpack.begin();
+		cout << "\n";
+		for (it; it != backpack.end(); ++it)
+		{
+			unsigned totalVal = (it->second.first * it->second.second);
+			cout << "(" << i << ") " << it->second.first << " " << it->first << " Units Bought at $" << it->second.second << " Total value:" << totalVal << endl;
+			++i;
+		}
+		vector<pair<string, unsigned>>& market = m.GetMap();
+		cout << "\nWhat to Sell? 'type (number) in' (0) = Back\n";
+
+		int choice = getLegitInt(0, backpack.size());
+		while (choice != 0 && backpack.size() != 0)
+		{
+			bool IsOnMarket = m.MarketCompare(backpack[choice - 1].first);
+			if (IsOnMarket)
+			{
+				EmptySack(backpack[choice - 1].second.first); //Empty
+				m_Money += (backpack[choice - 1].second.first * m.MarketPrice(backpack[choice - 1].first));
+				cout << "\n Sold " << backpack[choice - 1].second.first
+					<< " " << backpack[choice - 1].first << " at $"
+					<< m.MarketPrice(backpack[choice - 1].first) << endl;
+
+				backpack.erase(backpack.begin() + choice - 1);
+
+				if (backpack.size() != 0) //THIS WILLL FIX WHEN DELETING THE ITEM FROM BACKPACK
+				{
+					cout << "Sell Another?   (0) Back\n";
+					choice = getLegitInt(0, backpack.size());
+				}
+				else break;
+			}
+			else
+			{
+				cout << "\nThats Not on The Market Right Now..\n";
+				cout << "Sell Another?   (0) Back\n";
+				choice = getLegitInt(0, backpack.size());
+			}
+		}
+	}
+	else
+	{
+		cout << "\nNo Drugz to Sell Dummeh!\n";
+	}
 
 }
+
 
 void QuickPlayer::Buy(Market& m)
 {
+	vector<pair<string, unsigned>>& market = m.GetMap();
+	cout << "\nWhat are you looking to buy? 'type (number) in'\n";
+	int choice = getLegitInt(1, market.size());
 
+	if (GetUsedSpace() != GetBackpackSpace())
+	{
+		cout << "How Many " << m.GetName(choice) << " Units Would you like to buy?  \n" << (GetBackpackSpace() - GetUsedSpace()) << " Backpack Space , (0) to go back.  \n";
+		unsigned units = getLegitInt(0, (GetBackpackSpace() - GetUsedSpace()));
+		unsigned purchaseVal = (units * m.GetPrice(choice));
+		bool bought = false;
+		while (!bought && units != 0)
+		{
+			if (units != 0 && units <= (GetBackpackSpace() - GetUsedSpace()))
+			{
+
+				while (!bought && units != 0)
+				{
+					if (purchaseVal <= GetMoney())
+					{
+						bought = true;
+						FillSack(units);
+						// pair<string, pair<unsigned, unsigned>>
+						m_Product.push_back(make_pair(m.GetName(choice), make_pair(units, m.GetPrice(choice))));
+						m_Money -= purchaseVal;
+						cout << "\nBought " << units << " " << m.GetName(choice) << " Units .\n";
+						system("pause");
+						break;
+					}
+					else
+					{
+						cout << "\nYou Aint Got $" << purchaseVal << " try again or...(0) to go back fool\n";
+						units = getLegitInt(0, (GetBackpackSpace() - GetUsedSpace()));
+						purchaseVal = (units * m.GetPrice(choice));
+					}
+				}
+			}
+			else if (units > (GetBackpackSpace() - GetUsedSpace()))
+			{
+				cout << "\nNot enought space..\n";
+				system("pause");
+			}
+		}
+	}
+	else if (GetUsedSpace() == GetBackpackSpace())
+	{
+		cout << "\n\n NO SPACE LEFT ! \n";
+		system("pause");
+	}
 }
 void QuickPlayer::Sell(Market& m)
 {
+	vector<pair<string, pair<unsigned, unsigned>>>& backpack = GetSack();
+	if (backpack.size() != 0)
+	{
+		int i = 1;
+		vector<pair<string, pair<unsigned, unsigned>>>::iterator it = backpack.begin();
+		cout << "\n";
+		for (it; it != backpack.end(); ++it)
+		{
+			unsigned totalVal = (it->second.first * it->second.second);
+			cout << "(" << i << ") " << it->second.first << " " << it->first << " Units Bought at $" << it->second.second << " Total value:" << totalVal << endl;
+			++i;
+		}
+		vector<pair<string, unsigned>>& market = m.GetMap();
+		cout << "\nWhat to Sell? 'type (number) in' (0) = Back\n";
+
+		int choice = getLegitInt(0, backpack.size());
+		while (choice != 0 && backpack.size() != 0)
+		{
+			bool IsOnMarket = m.MarketCompare(backpack[choice - 1].first);
+			if (IsOnMarket)
+			{
+				EmptySack(backpack[choice - 1].second.first); //Empty
+				m_Money += (backpack[choice - 1].second.first * m.MarketPrice(backpack[choice - 1].first));
+				cout << "\n Sold " << backpack[choice - 1].second.first
+					<< " " << backpack[choice - 1].first << " at $"
+					<< m.MarketPrice(backpack[choice - 1].first) << endl;
+
+				backpack.erase(backpack.begin() + choice - 1);
+
+				if (backpack.size() != 0) //THIS WILLL FIX WHEN DELETING THE ITEM FROM BACKPACK
+				{
+					cout << "Sell Another?   (0) Back\n";
+					choice = getLegitInt(0, backpack.size());
+				}
+				else break;
+			}
+			else
+			{
+				cout << "\nThats Not on The Market Right Now..\n";
+				cout << "Sell Another?   (0) Back\n";
+				choice = getLegitInt(0, backpack.size());
+			}
+		}
+	}
+	else
+	{
+		cout << "\nNo Drugz to Sell Dummeh!\n";
+	}
 
 }
+
 
 void DangerPlayer::Buy(Market& m)
 {
+	vector<pair<string, unsigned>>& market = m.GetMap();
+	cout << "\nWhat are you looking to buy? 'type (number) in'\n";
+	int choice = getLegitInt(1, market.size());
 
+	if (GetUsedSpace() != GetBackpackSpace())
+	{
+		cout << "How Many " << m.GetName(choice) << " Units Would you like to buy?  \n" << (GetBackpackSpace() - GetUsedSpace()) << " Backpack Space , (0) to go back.  \n";
+		unsigned units = getLegitInt(0, (GetBackpackSpace() - GetUsedSpace()));
+		unsigned purchaseVal = (units * m.GetPrice(choice));
+		bool bought = false;
+		while (!bought && units != 0)
+		{
+			if (units != 0 && units <= (GetBackpackSpace() - GetUsedSpace()))
+			{
+
+				while (!bought && units != 0)
+				{
+					if (purchaseVal <= GetMoney())
+					{
+						bought = true;
+						FillSack(units);
+						// pair<string, pair<unsigned, unsigned>>
+						m_Product.push_back(make_pair(m.GetName(choice), make_pair(units, m.GetPrice(choice))));
+						m_Money -= purchaseVal;
+						cout << "\nBought " << units << " " << m.GetName(choice) << " Units .\n";
+						system("pause");
+						break;
+					}
+					else
+					{
+						cout << "\nYou Aint Got $" << purchaseVal << " try again or...(0) to go back fool\n";
+						units = getLegitInt(0, (GetBackpackSpace() - GetUsedSpace()));
+						purchaseVal = (units * m.GetPrice(choice));
+					}
+				}
+			}
+			else if (units > (GetBackpackSpace() - GetUsedSpace()))
+			{
+				cout << "\nNot enought space..\n";
+				system("pause");
+			}
+		}
+	}
+	else if (GetUsedSpace() == GetBackpackSpace())
+	{
+		cout << "\n\n NO SPACE LEFT ! \n";
+		system("pause");
+	}
 }
 void DangerPlayer::Sell(Market& m)
 {
+	vector<pair<string, pair<unsigned, unsigned>>>& backpack = GetSack();
+	if (backpack.size() != 0)
+	{
+		int i = 1;
+		vector<pair<string, pair<unsigned, unsigned>>>::iterator it = backpack.begin();
+		cout << "\n";
+		for (it; it != backpack.end(); ++it)
+		{
+			unsigned totalVal = (it->second.first * it->second.second);
+			cout << "(" << i << ") " << it->second.first << " " << it->first << " Units Bought at $" << it->second.second << " Total value:" << totalVal << endl;
+			++i;
+		}
+		vector<pair<string, unsigned>>& market = m.GetMap();
+		cout << "\nWhat to Sell? 'type (number) in' (0) = Back\n";
+
+		int choice = getLegitInt(0, backpack.size());
+		while (choice != 0 && backpack.size() != 0)
+		{
+			bool IsOnMarket = m.MarketCompare(backpack[choice - 1].first);
+			if (IsOnMarket)
+			{
+				EmptySack(backpack[choice - 1].second.first); //Empty
+				m_Money += (backpack[choice - 1].second.first * m.MarketPrice(backpack[choice - 1].first));
+				cout << "\n Sold " << backpack[choice - 1].second.first
+					<< " " << backpack[choice - 1].first << " at $"
+					<< m.MarketPrice(backpack[choice - 1].first) << endl;
+
+				backpack.erase(backpack.begin() + choice - 1);
+
+				if (backpack.size() != 0) //THIS WILLL FIX WHEN DELETING THE ITEM FROM BACKPACK
+				{
+					cout << "Sell Another?   (0) Back\n";
+					choice = getLegitInt(0, backpack.size());
+				}
+				else break;
+			}
+			else
+			{
+				cout << "\nThats Not on The Market Right Now..\n";
+				cout << "Sell Another?   (0) Back\n";
+				choice = getLegitInt(0, backpack.size());
+			}
+		}
+	}
+	else
+	{
+		cout << "\nNo Drugz to Sell Dummeh!\n";
+	}
 
 }
+
 
 
 int getLegitInt(int low, int high)

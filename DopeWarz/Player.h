@@ -76,6 +76,9 @@ private:
 	unsigned m_Backpack;
 	//0 INDEX   NAME        #UNITS   $PRICE BOUGHT AT		   
 	vector<pair<string, pair<unsigned, unsigned>>> m_Product;
+	//GUNS		NAME		#AMOUNT     DAMAGE 
+	vector<pair<string, pair<unsigned, unsigned>>> m_Guns;
+
 };
 
 class TankyPlayer : public Player
@@ -115,6 +118,8 @@ private:
 	unsigned m_Backpack;	
 	//0 INDEX   NAME        #UNITS   $PRICE BOUGHT AT		   
 	vector<pair<string, pair<unsigned, unsigned>>> m_Product;
+	//GUNS		NAME		#AMOUNT     DAMAGE 
+	vector<pair<string, pair<unsigned, unsigned>>> m_Guns;
 };
 
 class QuickPlayer : public Player
@@ -154,6 +159,8 @@ private:
 	unsigned m_Backpack;
 	//0 INDEX   NAME        #UNITS   $PRICE BOUGHT AT		   
 	vector<pair<string, pair<unsigned, unsigned>>> m_Product;
+	//GUNS		NAME		#AMOUNT     DAMAGE 
+	vector<pair<string, pair<unsigned, unsigned>>> m_Guns;
 };
 
 class DangerPlayer : public Player
@@ -193,6 +200,8 @@ private:
 	unsigned m_Backpack;
 	//0 INDEX   NAME        #UNITS   $PRICE BOUGHT AT		   
 	vector<pair<string, pair<unsigned, unsigned>>> m_Product;
+	//GUNS		NAME		#AMOUNT     DAMAGE 
+	vector<pair<string, pair<unsigned, unsigned>>> m_Guns;
 
 };
 
