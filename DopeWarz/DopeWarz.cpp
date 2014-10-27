@@ -2,6 +2,7 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
+#include <utility>
 #include "DopeWarz.h"
 #include "Market.h"
 
@@ -226,7 +227,7 @@ void DopeWarz::Play(string name, unsigned Class, unsigned days)
 						<< "\n*********************************************\n\n";
 					cout << "(1) Buy !\n"
 						<< "(2) Sell !\n"
-						<< "(3) Show Stats\n"
+						<< "(3) Show Stats/(Gunz & Drugz)\n"
 						<< "(4) Move Location (Current: Home/SafeHouse)\n"
 						<< "(0) Save & Quit\n";
 					choice = getLegitInt(0, 4);
@@ -272,7 +273,7 @@ void DopeWarz::Play(string name, unsigned Class, unsigned days)
 						<< "\n*********************************************\n\n";
 					cout << "(1) Buy !\n"
 						<< "(2) Sell !\n"
-						<< "(3) Show Stats\n"
+						<< "(3) Show Stats/(Gunz & Drugz)\n"
 						<< "(4) Move Location (Current: Downtown Dundas)\n"
 						<< "(5) Loan Shark " << "  (Debt: $" << p->GetDebt() << ")\n"
 						<< "(0) Save & Quit\n";
@@ -320,7 +321,7 @@ void DopeWarz::Play(string name, unsigned Class, unsigned days)
 						<< "\n*********************************************\n\n";
 					cout << "(1) Buy !\n"
 						<< "(2) Sell !\n"
-						<< "(3) Show Stats\n"
+						<< "(3) Show Stats/(Gunz & Drugz)\n"
 						<< "(4) Move Location (Current: Wellington St)\n"
 						<< "(5) Hospital\n"
 						<< "(0) Save & Quit\n";
@@ -368,7 +369,7 @@ void DopeWarz::Play(string name, unsigned Class, unsigned days)
 						<< "\n*********************************************\n\n";
 					cout << "(1) Buy !\n"
 						<< "(2) Sell !\n"
-						<< "(3) Show Stats\n"
+						<< "(3) Show Stats/(Gunz & Drugz)\n"
 						<< "(4) Move Location (Current: Richmond Row)\n"
 						<< "(5) Bank\n"
 						<< "(0) Save & Quit\n";
@@ -416,7 +417,7 @@ void DopeWarz::Play(string name, unsigned Class, unsigned days)
 						<< "\n*********************************************\n\n";
 					cout << "(1) Buy !\n"
 						<< "(2) Sell !\n"
-						<< "(3) Show Stats\n"
+						<< "(3) Show Stats/(Gunz & Drugz)\n"
 						<< "(4) Move Location (Current: White Oaks Parking Lot)\n"
 						<< "(5) Gun Trader\n"
 						<< "(0) Save & Quit\n";
@@ -464,7 +465,7 @@ while (choice6 != 0 && choice6 != 4 && m_DaysLeft != 0 && p->GetHealth() > 0)
 						<< "\n*********************************************\n\n";
 					cout << "(1) Buy !\n"
 						<< "(2) Sell !\n"
-						<< "(3) Show Stats\n"
+						<< "(3) Show Stats/(Gunz & Drugz)\n"
 						<< "(4) Move Location (Current: Library)\n"
 						<< "(5) Improve Stats\n"
 						<< "(0) Save & Quit\n";
@@ -511,7 +512,7 @@ while (choice6 != 0 && choice6 != 4 && m_DaysLeft != 0 && p->GetHealth() > 0)
 						<< "\n*********************************************\n\n";
 					cout << "(1) Buy !\n"
 						<< "(2) Sell !\n"
-						<< "(3) Show Stats\n"
+						<< "(3) Show Stats/(Gunz & Drugz)\n"
 						<< "(4) Move Location (Current: GoodLife)\n"
 						<< "(5) Hit the Gym!  (Get Ripped)\n"
 						<< "(0) Save & Quit\n";
@@ -794,10 +795,23 @@ void DopeWarz::BuyGuns(Player * p)
 					if (choice == 3){ break; }
 					if (choice == 1)
 					{
-						//BUY
-						cout << "\nThanks for Buying Pistol1 \n";
-						system("pause");
-						break;
+						unsigned money = p->GetMoney();
+						if (money >= 500)
+						{
+							unsigned ret = (money - 500);
+							p->SetMoney(ret);
+							pair<string, pair<unsigned, unsigned>> gun = make_pair("Auto Scope Sniper", make_pair(1, 25));
+							p->AddGun(gun);
+							cout << "\nThanks for Buying The Luger \n";
+							system("pause");
+							break;
+						}
+						else
+						{
+							cout << "\nNot Enought Money!\n";
+							system("pause");
+							break;
+						}
 					}
 //***************************************************************************************************************************
 					system("cls");
@@ -828,10 +842,24 @@ void DopeWarz::BuyGuns(Player * p)
 					if (choice == 3){ break; }
 					if (choice == 1)
 					{
-						//BUY
-						cout << "\nThanks for Buying BROWNING \n";
-						system("pause");
-						break;
+						unsigned money = p->GetMoney();
+						if (money >= 650)
+						{
+							unsigned ret = (money - 650);
+							p->SetMoney(ret);
+							pair<string, pair<unsigned, unsigned>> gun = make_pair("USP", make_pair(1, 30));
+							p->AddGun(gun);
+							cout << "\nThanks for Buying The USP \n";
+							system("pause");
+							break;
+						}
+						else
+						{
+							cout << "\nNot Enought Money!\n";
+							system("pause");
+							break;
+						}
+			
 					}
 //***************************************************************************************************************************
 					system("cls");
@@ -857,10 +885,23 @@ void DopeWarz::BuyGuns(Player * p)
 					if (choice == 3){ break; }
 					if (choice == 1)
 					{
-						//BUY
-						cout << "\nThanks for Buying The Glock \n";
-						system("pause");
-						break;
+						unsigned money = p->GetMoney();
+						if (money >= 750)
+						{
+							unsigned ret = (money - 750);
+							p->SetMoney(ret);
+							pair<string, pair<unsigned, unsigned>> gun = make_pair("Glock", make_pair(1, 35));
+							p->AddGun(gun);
+							cout << "\nThanks for Buying The Glock \n";
+							system("pause");
+							break;
+						}
+						else
+						{
+							cout << "\nNot Enought Money!\n";
+							system("pause");
+							break;
+						}
 					}
 //***************************************************************************************************************************
 					system("cls");
@@ -896,10 +937,23 @@ void DopeWarz::BuyGuns(Player * p)
 					if (choice == 3){ break; }
 					if (choice == 1)
 					{
-						//BUY
-						cout << "\nThanks for Buying The Six Shooter!\n";
-						system("pause");
-						break;
+						unsigned money = p->GetMoney();
+						if (money >= 800)
+						{
+							unsigned ret = (money - 800);
+							p->SetMoney(ret);
+							pair<string, pair<unsigned, unsigned>> gun = make_pair("Six Shooter", make_pair(1, 35));
+							p->AddGun(gun);
+							cout << "\nThanks for Buying The Six Shooter!\n";
+							system("pause");
+							break;
+						}
+						else
+						{
+							cout << "\nNot Enought Money!\n";
+							system("pause");
+							break;
+						}
 					}
 //***************************************************************************************************************************
 					system("cls");
@@ -920,10 +974,23 @@ void DopeWarz::BuyGuns(Player * p)
 					if (choice == 3){ break; }
 					if (choice == 1)
 					{
-						//BUY
-						cout << "\nThanks for Buying Silenced PP7 \n";
-						system("pause");
-						break;
+						unsigned money = p->GetMoney();
+						if (money >= 900)
+						{
+							unsigned ret = (money - 900);
+							p->SetMoney(ret);
+							pair<string, pair<unsigned, unsigned>> gun = make_pair("Silenced PP7", make_pair(1, 40));
+							p->AddGun(gun);
+							cout << "\nThanks for Buying Silenced PP7 \n";
+							system("pause");
+							break;
+						}
+						else
+						{
+							cout << "\nNot Enought Money!\n";
+							system("pause");
+							break;
+						}
 					}
 //***************************************************************************************************************************
 					system("cls");
@@ -954,10 +1021,23 @@ void DopeWarz::BuyGuns(Player * p)
 					if (choice == 3){ break; }
 					if (choice == 1)
 					{
-						//BUY
-						cout << "\nThanks for Buying The Desert Eagle \n";
-						system("pause");
-						break;
+						unsigned money = p->GetMoney();
+						if (money >= 1000)
+						{
+							unsigned ret = (money - 1000);
+							p->SetMoney(ret);
+							pair<string, pair<unsigned, unsigned>> gun = make_pair("Desert Eagle", make_pair(1, 50));
+							p->AddGun(gun);
+							cout << "\nThanks for Buying The Desert Eagle! \n";
+							system("pause");
+							break;
+						}
+						else
+						{
+							cout << "\nNot Enought Money!\n";
+							system("pause");
+							break;
+						}
 					}
 //***************************************************************************************************************************
 				} // <---While loop end..
@@ -985,8 +1065,6 @@ void DopeWarz::BuyGuns(Player * p)
 						"        /  /\n"
 						"       /__/\n";
 
-
-
 					cout << "\nBuy This?!\n"
 						<< "(1) Yes ($1250)\n"
 						<< "(2) Next! \n"
@@ -995,10 +1073,23 @@ void DopeWarz::BuyGuns(Player * p)
 					if (choice == 3){ break; }
 					if (choice == 1)
 					{
-						//BUY
-						cout << "\nThanks for Buying The MP5 \n";
-						system("pause");
-						break;
+						unsigned money = p->GetMoney();
+						if (money >= 1250)
+						{
+							unsigned ret = (money - 1250);
+							p->SetMoney(ret);
+							pair<string, pair<unsigned, unsigned>> gun = make_pair("MP5", make_pair(1, 60));
+							p->AddGun(gun);
+							cout << "\nThanks for Buying The MP5! \n";
+							system("pause");
+							break;
+						}
+						else
+						{
+							cout << "\nNot Enought Money!\n";
+							system("pause");
+							break;
+						}
 					}
 //***************************************************************************************************************************
 					system("cls");
@@ -1022,10 +1113,23 @@ void DopeWarz::BuyGuns(Player * p)
 					if (choice == 3){ break; }
 					if (choice == 1)
 					{
-						//BUY
-						cout << "\nThanks for Buying M4A1 \n";
-						system("pause");
-						break;
+						unsigned money = p->GetMoney();
+						if (money >= 1500)
+						{
+							unsigned ret = (money - 1500);
+							p->SetMoney(ret);
+							pair<string, pair<unsigned, unsigned>> gun = make_pair("M4A1", make_pair(1, 70));
+							p->AddGun(gun);
+							cout << "\nThanks for Buying M4A1!\n";
+							system("pause");
+							break;
+						}
+						else
+						{
+							cout << "\nNot Enought Money!\n";
+							system("pause");
+							break;
+						}
 					}
 //***************************************************************************************************************************
 					system("cls");
@@ -1050,10 +1154,23 @@ void DopeWarz::BuyGuns(Player * p)
 					if (choice == 3){ break; }
 					if (choice == 1)
 					{
-						//BUY
-						cout << "\nThanks for Buying The Steyr Aug \n";
-						system("pause");
-						break;
+						unsigned money = p->GetMoney();
+						if (money >= 1750)
+						{
+							unsigned ret = (money - 1750);
+							p->SetMoney(ret);
+							pair<string, pair<unsigned, unsigned>> gun = make_pair("Steyr Aug", make_pair(1, 80));
+							p->AddGun(gun);
+							cout << "\nThanks for Buying The Steyr Aug \n";
+							system("pause");
+							break;
+						}
+						else
+						{
+							cout << "\nNot Enought Money!\n";
+							system("pause");
+							break;
+						}
 					}
 //***************************************************************************************************************************
 					system("cls");
@@ -1066,7 +1183,7 @@ void DopeWarz::BuyGuns(Player * p)
 						"     `--._,_,_,-,--,--'' (____| _ '___'oo ; ; ; ; ; ;_____ T|\n"
 						"              `-'--'-/_,-------| ) ___--,__,------._ '__  |I|\n"
 						"                       '==----/   '' )'--'_         `-._`-'I|\n"
-						"                       /=[JW]/     `' -   --'           `-.L|\n"
+						"                       /=[JM]/     `' -   --'           `-.L|\n"
 						"                      /==---/           '- -'\n"
 						"                      '-.__/             '__7 \n";
  
@@ -1080,10 +1197,23 @@ void DopeWarz::BuyGuns(Player * p)
 					if (choice == 3){ break; }
 					if (choice == 1)
 					{
-						//BUY
-						cout << "\nThanks for Buying The Sig Commando \n";
-						system("pause");
-						break;
+						unsigned money = p->GetMoney();
+						if (money >= 2250)
+						{
+							unsigned ret = (money - 2250);
+							p->SetMoney(ret);
+							pair<string, pair<unsigned, unsigned>> gun = make_pair("Sig Commando", make_pair(1, 90));
+							p->AddGun(gun);
+							cout << "\nThanks for Buying The Sig Commando \n";
+							system("pause");
+							break;
+						}
+						else
+						{
+							cout << "\nNot Enought Money!\n";
+							system("pause");
+							break;
+						}
 					}
 //***************************************************************************************************************************
 					system("cls");
@@ -1111,10 +1241,23 @@ void DopeWarz::BuyGuns(Player * p)
 					if (choice == 3){ break; }
 					if (choice == 1)
 					{
-						//BUY
-						cout << "\nThanks for Buying MachineGuns5 \n";
-						system("pause");
-						break;
+						unsigned money = p->GetMoney();
+						if (money >= 2500)
+						{
+							unsigned ret = (money - 2500);
+							p->SetMoney(ret);
+							pair<string, pair<unsigned, unsigned>> gun = make_pair("LMG", make_pair(1, 100));
+							p->AddGun(gun);
+							cout << "\nThanks for Buying The LMG \n";
+							system("pause");
+							break;
+						}
+						else
+						{
+							cout << "\nNot Enought Money!\n";
+							system("pause");
+							break;
+						}
 					}
 //***************************************************************************************************************************
 					system("cls");
@@ -1151,10 +1294,23 @@ void DopeWarz::BuyGuns(Player * p)
 					if (choice == 3){ break; }
 					if (choice == 1)
 					{
-						//BUY
-						cout << "\nThanks for Buying MachineGuns6 \n";
-						system("pause");
-						break;
+						unsigned money = p->GetMoney();
+						if (money >= 3000)
+						{
+							unsigned ret = (money - 3000);
+							p->SetMoney(ret);
+							pair<string, pair<unsigned, unsigned>> gun = make_pair("Mini Gun", make_pair(1, 110));
+							p->AddGun(gun);
+							cout << "\nThanks for Buying Mini Gun \n";
+							system("pause");
+							break;
+						}
+						else
+						{
+							cout << "\nNot Enought Money!\n";
+							system("pause");
+							break;
+						}
 					}
 //***************************************************************************************************************************
 				} // <---While loop end..
@@ -1165,7 +1321,7 @@ void DopeWarz::BuyGuns(Player * p)
 				{
 //***************************************************************************************************************************
 					system("cls");
-					cout << "\n\t Snipers1 !\n\n"
+					cout << "\n\t Snipers 1 !\n\n"
 
 						"                               ____________\n"
 						"                              |            |\n"
@@ -1186,14 +1342,27 @@ void DopeWarz::BuyGuns(Player * p)
 					if (choice == 3){ break; }
 					if (choice == 1)
 					{
-						//BUY
-						cout << "\nThanks for Buying Snipers1 \n";
-						system("pause");
-						break;
+						unsigned money = p->GetMoney();
+						if (money >= 3500)
+						{
+							unsigned ret = (money - 3500);
+							p->SetMoney(ret);
+							pair<string, pair<unsigned, unsigned>> gun = make_pair("Interception", make_pair(1, 120));
+							p->AddGun(gun);
+							cout << "\nThanks for Buying The Interception \n";
+							system("pause");
+							break;
+						}
+						else
+						{
+							cout << "\nNot Enought Money!\n";
+							system("pause");
+							break;
+						}
 					}
 //***************************************************************************************************************************
 					system("cls");
-					cout << "\n\t Snipers2 !\n\n"
+					cout << "\n\t Snipers 2 !\n\n"
 
 						"                                 /____________,\n"
 						"     __                          |__________||\n"
@@ -1213,14 +1382,27 @@ void DopeWarz::BuyGuns(Player * p)
 					if (choice == 3){ break; }
 					if (choice == 1)
 					{
-						//BUY
-						cout << "\nThanks for Buying Snipers2 \n";
-						system("pause");
-						break;
+						unsigned money = p->GetMoney();
+						if (money >= 4000)
+						{
+							unsigned ret = (money - 4000);
+							p->SetMoney(ret);
+							pair<string, pair<unsigned, unsigned>> gun = make_pair("AK40Sniper", make_pair(1, 130));
+							p->AddGun(gun);
+							cout << "\nThanks for Buying The AK40Sniper \n";
+							system("pause");
+							break;
+						}
+						else
+						{
+							cout << "\nNot Enought Money!\n";
+							system("pause");
+							break;
+						}
 					}
 //***************************************************************************************************************************
 					system("cls");
-					cout << "\n\t Snipers2 !\n\n"
+					cout << "\n\t Snipers 3 !\n\n"
 
 
 						"                                 ,----.___________,-,\n"
@@ -1236,17 +1418,30 @@ void DopeWarz::BuyGuns(Player * p)
 
 
 					cout << "\nBuy This?!\n"
-						<< "(1) Yes ($1750)\n"
+						<< "(1) Yes ($5000)\n"
 						<< "(2) Next! \n"
 						<< "(3) Leave \n";
 					choice = getLegitInt(1, 3);
 					if (choice == 3){ break; }
 					if (choice == 1)
 					{
-						//BUY
-						cout << "\nThanks for Buying Snipers2 \n";
-						system("pause");
-						break;
+						unsigned money = p->GetMoney();
+						if (money >= 5000)
+						{
+							unsigned ret = (money - 5000);
+							p->SetMoney(ret);
+							pair<string, pair<unsigned, unsigned>> gun = make_pair("Auto Scope Sniper", make_pair(1, 150));
+							p->AddGun(gun);
+							cout << "\nThanks for Buying The Auto Scope Sniper! \n";
+							system("pause");
+							break;
+						}
+						else
+						{
+							cout << "\nNot Enought Money!\n";
+							system("pause");
+							break;
+						}
 					}
 //***************************************************************************************************************************
 					//if more snipers...

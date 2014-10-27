@@ -132,22 +132,45 @@ void SmartPlayer::ShowBackpack()
 	vector<pair<string, pair<unsigned, unsigned>>>& backpack = GetSack();
 	if (backpack.size() != 0)
 	{
+		cout << "\nDrugz:\n";
 		for (vector<pair<string, pair<unsigned, unsigned>>>::iterator it = backpack.begin(); it != backpack.end(); ++it)
 		{
 			unsigned totalVal = (it->second.first * it->second.second);
 			cout << it->second.first << " " << it->first << " Units Bought at $" << it->second.second << " Total value:" << totalVal << endl;
 		}
 	}
+	vector<pair<string, pair<unsigned, unsigned>>>& gunz = GetGuns();
+	if (gunz.size() != 0)
+	{
+		cout << "\nGunz:\n";
+		for (vector<pair<string, pair<unsigned, unsigned>>>::iterator it = gunz.begin(); it != gunz.end(); ++it)
+		{
+			unsigned totalVal = (it->second.first * it->second.second);
+			cout << it->second.first << " " << it->first << "--> Damage Each: " << it->second.second << " Total Damage:" << totalVal << endl;
+		}
+	}
+
 }
 void TankyPlayer::ShowBackpack()
 {
 	vector<pair<string, pair<unsigned, unsigned>>>& backpack = GetSack();
 	if (backpack.size() != 0)
 	{
+		cout << "\nDrugz:\n";
 		for (vector<pair<string, pair<unsigned, unsigned>>>::iterator it = backpack.begin(); it != backpack.end(); ++it)
 		{
 			unsigned totalVal = (it->second.first * it->second.second);
 			cout << it->second.first << " " << it->first << " Units Bought at $" << it->second.second << " Total value:" << totalVal << endl;
+		}
+	}
+	vector<pair<string, pair<unsigned, unsigned>>>& gunz = GetGuns();
+	if (gunz.size() != 0)
+	{
+		cout << "\nGunz:\n";
+		for (vector<pair<string, pair<unsigned, unsigned>>>::iterator it = gunz.begin(); it != gunz.end(); ++it)
+		{
+			unsigned totalVal = (it->second.first * it->second.second);
+			cout << it->second.first << " " << it->first << "--> Damage Each: " << it->second.second << " Total Damage:" << totalVal << endl;
 		}
 	}
 }
@@ -156,10 +179,22 @@ void QuickPlayer::ShowBackpack()
 	vector<pair<string, pair<unsigned, unsigned>>>& backpack = GetSack();
 	if (backpack.size() != 0)
 	{
+		cout << "\nDrugz:\n";
 		for (vector<pair<string, pair<unsigned, unsigned>>>::iterator it = backpack.begin(); it != backpack.end(); ++it)
 		{
 			unsigned totalVal = (it->second.first * it->second.second);
 			cout << it->second.first << " " << it->first << " Units Bought at $" << it->second.second << " Total value:" << totalVal << endl;
+		}
+	}
+	
+	vector<pair<string, pair<unsigned, unsigned>>>& gunz = GetGuns();
+	if (gunz.size() != 0)
+	{
+		cout << "\nGunz:\n";
+		for (vector<pair<string, pair<unsigned, unsigned>>>::iterator it = gunz.begin(); it != gunz.end(); ++it)
+		{
+			unsigned totalVal = (it->second.first * it->second.second);
+			cout << it->second.first << " " << it->first << "--> Damage Each: " << it->second.second << " Total Damage:" << totalVal << endl;
 		}
 	}
 }
@@ -168,13 +203,114 @@ void DangerPlayer::ShowBackpack()
 	vector<pair<string, pair<unsigned, unsigned>>>& backpack = GetSack();
 	if (backpack.size() != 0)
 	{
+		cout << "\nDrugz:\n";
 		for (vector<pair<string, pair<unsigned, unsigned>>>::iterator it = backpack.begin(); it != backpack.end(); ++it)
 		{
 			unsigned totalVal = (it->second.first * it->second.second);
 			cout << it->second.first << " " << it->first << " Units Bought at $" << it->second.second << " Total value:" << totalVal << endl;
 		}
 	}
+	
+	vector<pair<string, pair<unsigned, unsigned>>>& gunz = GetGuns();
+	if (gunz.size() != 0)
+	{
+		cout << "\nGunz:\n";
+		for (vector<pair<string, pair<unsigned, unsigned>>>::iterator it = gunz.begin(); it != gunz.end(); ++it)
+		{
+			unsigned totalVal = (it->second.first * it->second.second);
+			cout << it->second.first << " " << it->first << "--> Damage Each: " << it->second.second << " Total Damage:" << totalVal << endl;
+		}
+	}
 }
+
+void SmartPlayer::AddGun(pair<string, pair<unsigned, unsigned>> gun)
+{
+	
+	vector<pair<string, pair<unsigned, unsigned>>>& gunz = GetGuns();
+	bool increased = false;
+	if (gunz.size() != 0)
+	{
+		for (vector<pair<string, pair<unsigned, unsigned>>>::iterator it = gunz.begin(); it != gunz.end(); ++it)
+		{
+			if (it->first == gun.first)
+			{
+				++it->second.first;
+				increased = true;
+				break;
+			}
+		}
+	}
+	if (!increased)
+	{
+		m_Guns.push_back(gun);
+	}
+	
+}
+void TankyPlayer::AddGun(pair<string, pair<unsigned, unsigned>> gun)
+{
+	vector<pair<string, pair<unsigned, unsigned>>>& gunz = GetGuns();
+	bool increased = false;
+	if (gunz.size() != 0)
+	{
+		for (vector<pair<string, pair<unsigned, unsigned>>>::iterator it = gunz.begin(); it != gunz.end(); ++it)
+		{
+			if (it->first == gun.first)
+			{
+				++it->second.first;
+				increased = true;
+				break;
+			}
+		}
+	}
+	if (!increased)
+	{
+		m_Guns.push_back(gun);
+	}
+}
+void QuickPlayer::AddGun(pair<string, pair<unsigned, unsigned>> gun)
+{
+	vector<pair<string, pair<unsigned, unsigned>>>& gunz = GetGuns();
+	bool increased = false;
+	if (gunz.size() != 0)
+	{
+		for (vector<pair<string, pair<unsigned, unsigned>>>::iterator it = gunz.begin(); it != gunz.end(); ++it)
+		{
+			if (it->first == gun.first)
+			{
+				++it->second.first;
+				increased = true;
+				break;
+			}
+		}
+	}
+	if (!increased)
+	{
+		m_Guns.push_back(gun);
+	}
+}
+void DangerPlayer::AddGun(pair<string, pair<unsigned, unsigned>> gun)
+{
+	vector<pair<string, pair<unsigned, unsigned>>>& gunz = GetGuns();
+	bool increased = false;
+	if (gunz.size() != 0)
+	{
+		for (vector<pair<string, pair<unsigned, unsigned>>>::iterator it = gunz.begin(); it != gunz.end(); ++it)
+		{
+			if (it->first == gun.first)
+			{
+				++it->second.first;
+				increased = true;
+				break;
+			}
+		}
+	}
+	if (!increased)
+	{
+		m_Guns.push_back(gun);
+	}
+}
+
+
 
 
 void SmartPlayer::Buy(Market& m)

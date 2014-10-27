@@ -25,6 +25,7 @@ public:
 	virtual void Buy(Market& m) = 0;
 	virtual void Sell(Market& m) = 0;
 	virtual void ShowBackpack() = 0;
+	virtual void AddGun(pair<string, pair<unsigned, unsigned>> gun) = 0;
 	Player();
 	~Player();
 };
@@ -55,6 +56,8 @@ public:
 	virtual unsigned GetBackpackSpace(){ return m_Backpack; };
 	virtual unsigned GetUsedSpace(){ return m_UsedSpace; };
 	vector<pair<string, pair<unsigned, unsigned>>>& GetSack(){ return m_Product; };
+	vector<pair<string, pair<unsigned, unsigned>>>& GetGuns(){ return m_Guns; };
+	virtual void AddGun(pair<string, pair<unsigned, unsigned>> gun);
 	void FillSack(int units){ m_UsedSpace += units; };
 	void EmptySack(int units){ m_UsedSpace -= units; };
 	virtual void Buy(Market& m);
@@ -98,6 +101,8 @@ public:
 	virtual unsigned GetBackpackSpace(){ return m_Backpack; };
 	virtual unsigned GetUsedSpace(){ return m_UsedSpace; };
 	vector<pair<string, pair<unsigned, unsigned>>>& GetSack(){ return m_Product; };
+	vector<pair<string, pair<unsigned, unsigned>>>& GetGuns(){ return m_Guns; };
+	virtual void AddGun(pair<string, pair<unsigned, unsigned>> gun);
 	void FillSack(int units){ m_UsedSpace += units; };
 	void EmptySack(int units){ m_UsedSpace -= units; };
 	virtual void Buy(Market& m);
@@ -139,6 +144,8 @@ public:
 	virtual unsigned GetBackpackSpace(){ return m_Backpack; };
 	virtual unsigned GetUsedSpace(){ return m_UsedSpace; };
 	vector<pair<string, pair<unsigned, unsigned>>>& GetSack(){ return m_Product; };
+	vector<pair<string, pair<unsigned, unsigned>>>& GetGuns(){ return m_Guns; };
+	virtual void AddGun(pair<string, pair<unsigned, unsigned>> gun);
 	void FillSack(int units){ m_UsedSpace += units; };
 	void EmptySack(int units){ m_UsedSpace -= units; };
 	virtual void Buy(Market& m);
@@ -182,6 +189,8 @@ public:
 	void FillSack(int units){ m_UsedSpace += units; };
 	void EmptySack(int units){ m_UsedSpace -= units; };
 	vector<pair<string, pair<unsigned, unsigned>>>& GetSack(){ return m_Product; };
+	vector<pair<string, pair<unsigned, unsigned>>>& GetGuns(){ return m_Guns; };
+	virtual void AddGun(pair<string, pair<unsigned, unsigned>> gun);
 	virtual void Buy(Market& m);
 	virtual void Sell(Market& m);
 	virtual void ShowBackpack();
@@ -202,7 +211,6 @@ private:
 	vector<pair<string, pair<unsigned, unsigned>>> m_Product;
 	//GUNS		NAME		#AMOUNT     DAMAGE 
 	vector<pair<string, pair<unsigned, unsigned>>> m_Guns;
-
 };
 
 
