@@ -236,11 +236,11 @@ void DopeWarz::Play(string name, unsigned Class, unsigned days)
 						case 0:	quit = true; break;
 						case 1:  p->Buy(m);  DDay(p); system("cls"); break;
 						case 2: if (p->GetUsedSpace() == 0)
-						{
+								{
 									system("cls");
 									showedStats = true;
 									break;
-						}
+								}
 								else
 								{
 									p->Sell(m); DDay(p); system("cls"); break;
@@ -283,11 +283,11 @@ void DopeWarz::Play(string name, unsigned Class, unsigned days)
 					case 0:	quit = true; break;
 					case 1:  p->Buy(m);  DDay(p); system("cls"); break;
 					case 2: if (p->GetUsedSpace() == 0)
-					{
+							{
 								system("cls");
 								showedStats = true;
 								break;
-					}
+							}
 							else
 							{
 								p->Sell(m); DDay(p); system("cls"); break;
@@ -331,11 +331,11 @@ void DopeWarz::Play(string name, unsigned Class, unsigned days)
 					case 0:	quit = true; break;
 					case 1:  p->Buy(m);  DDay(p); system("cls"); break;
 					case 2: if (p->GetUsedSpace() == 0)
-					{
+							{
 								system("cls");
 								showedStats = true;
 								break;
-					}
+							}
 							else
 							{
 								p->Sell(m); DDay(p); system("cls"); break;
@@ -379,11 +379,11 @@ void DopeWarz::Play(string name, unsigned Class, unsigned days)
 					case 0:	quit = true; break;
 					case 1:  p->Buy(m);  DDay(p); system("cls"); break;
 					case 2: if (p->GetUsedSpace() == 0)
-					{
+							{
 								system("cls");
 								showedStats = true;
 								break;
-					}
+							}
 							else
 							{
 								p->Sell(m); DDay(p); system("cls"); break;
@@ -427,11 +427,11 @@ void DopeWarz::Play(string name, unsigned Class, unsigned days)
 					case 0:	quit = true; break;
 					case 1:  p->Buy(m);  DDay(p); system("cls"); break;
 					case 2: if (p->GetUsedSpace() == 0)
-					{
+							{
 								system("cls");
 								showedStats = true;
 								break;
-					}
+							}
 							else
 							{
 								p->Sell(m); DDay(p); system("cls"); break;
@@ -475,11 +475,11 @@ while (choice6 != 0 && choice6 != 4 && m_DaysLeft != 0 && p->GetHealth() > 0)
 					case 0:	quit = true; break;
 					case 1:  p->Buy(m);  DDay(p); system("cls"); break;
 					case 2: if (p->GetUsedSpace() == 0)
-					{
+							{
 								system("cls");
 								showedStats = true;
 								break;
-					}
+							}
 							else
 							{
 								p->Sell(m); DDay(p); system("cls"); break;
@@ -487,6 +487,7 @@ while (choice6 != 0 && choice6 != 4 && m_DaysLeft != 0 && p->GetHealth() > 0)
 
 					case 3:  p->DisplayStats(pname); system("pause"); system("cls"); showedStats = true; break;
 					case 4:  Location = MoveLoacation(); system("cls"); changeLocation = true; DDay(p); break;
+					case 5: UseLibrary(p); system("cls"); showedStats = true; break;
 					}
 				}
 				break;
@@ -522,11 +523,11 @@ while (choice6 != 0 && choice6 != 4 && m_DaysLeft != 0 && p->GetHealth() > 0)
 					case 0:	quit = true; break;
 					case 1:  p->Buy(m);  DDay(p); system("cls"); break;
 					case 2: if (p->GetUsedSpace() == 0)
-					{
+							{
 								system("cls");
 								showedStats = true;
 								break;
-					}
+							}
 							else
 							{
 								p->Sell(m); DDay(p); system("cls"); break;
@@ -534,6 +535,7 @@ while (choice6 != 0 && choice6 != 4 && m_DaysLeft != 0 && p->GetHealth() > 0)
 
 					case 3:  p->DisplayStats(pname); system("pause"); system("cls"); showedStats = true; break;
 					case 4:  Location = MoveLoacation(); system("cls"); changeLocation = true; DDay(p); break;
+					case 5: UseGym(p); system("cls"); showedStats = true; break;
 					}
 				}
 				break;
@@ -1099,7 +1101,7 @@ void DopeWarz::BuyGuns(Player * p)
 						"                    /,| ___________((____________\\__\n"
 						" ,========.________//_|/===========._#############L_Y_....-----====//\n"
 						"(#######(==========\################\=======.______ --############((\n"
-						" `=======`          '==============| ::::.___| [))[JW]#############'\n"
+						" `=======`          '==============| ::::.___| [))[JM]#############'\n"
 						"                                    |####|     ""'###|   :##########'\n"
 						"                                   /####/         '##'  ```'' =, ,))\n"
 						"                                  /####/           '##'\n"
@@ -1143,7 +1145,7 @@ void DopeWarz::BuyGuns(Player * p)
 						"                 |=|     ' ' )_) (  )__,____,____,____,____|\n"
 						"                 |=|      ' '  | |    )====)     `:__      |\n"
 						"                 |__'      ' '_) |   ,====,          '     |\n"
-						"                            `----'  ,====,            '[JW]|\n"
+						"                            `----'  ,====,            '[JM]|\n"
 						"                                    `-._,             :____|\n";
 
 					cout << "\nBuy This?!\n"
@@ -1225,7 +1227,7 @@ void DopeWarz::BuyGuns(Player * p)
 						"=====(  )_##################)==`)###################|\n"
 						"     ,' |_)#################)===)#######__`__`__`___|____\n"
 						"    =`--'._,_,_#############)===)######(_,_,_,_,_,_,_,_,_)\n"
-						"               '--,_,__,__|.------.,--.,-.[JW],-----'\n"
+						"               '--,_,__,__|.------.,--.,-.[JM],-----'\n"
 						"                           |-##-| ||  )) |###( \n"
 						"                           |-##-| '======|,###'\n"
 						"                           '----'        ',####'\n"
@@ -1410,11 +1412,11 @@ void DopeWarz::BuyGuns(Player * p)
 						"      __/()(_________________________/o(____)o(__  ``           _\n"
 						"     (__________________________(_(_(_(_(________Y_....-----====;\n"
 						"                   ( , , , , , , (______________)--            ((\n"
-						"                    (_____________|________|[ )) JW  ____   __  ((\n"
+						"                    (_____________|________|[ )) JM  ____   __  ((\n"
 						"                                   |____|    '' (.__-'`'. ((__) '((\n"
 						"                                   |____|        `''      ```'''=,))\n"
 						"                                   |    |\n"
-						"                                   `====´\n";
+						"                                   `===='\n";
 
 
 					cout << "\nBuy This?!\n"
@@ -1461,7 +1463,14 @@ void DopeWarz::BuyGuns(Player * p)
 
 }
 
+void DopeWarz::UseLibrary(Player * p)
+{
 
+}
+void DopeWarz::UseGym(Player * p)
+{
+
+}
 
 
 

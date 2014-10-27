@@ -29,6 +29,8 @@ public:
 	void GoToHospital(Player * p);
 	void BuyGuns(Player * p);
 	void UseBank(Player * p);
+	void UseLibrary(Player * p);
+	void UseGym(Player * p);
 	void SetBank(unsigned money){ m_BankMoney = money; };
 	unsigned GetBank() const{ return m_BankMoney; };
 
