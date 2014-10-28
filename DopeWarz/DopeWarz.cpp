@@ -487,7 +487,7 @@ while (choice6 != 0 && choice6 != 4 && m_DaysLeft != 0 && p->GetHealth() > 0)
 
 					case 3:  p->DisplayStats(pname); system("pause"); system("cls"); showedStats = true; break;
 					case 4:  Location = MoveLoacation(); system("cls"); changeLocation = true; DDay(p); break;
-					case 5: UseLibrary(p); system("cls"); showedStats = true; break;
+					case 5: UseLibrary(p); system("cls"); break;
 					}
 				}
 				break;
@@ -535,7 +535,7 @@ while (choice6 != 0 && choice6 != 4 && m_DaysLeft != 0 && p->GetHealth() > 0)
 
 					case 3:  p->DisplayStats(pname); system("pause"); system("cls"); showedStats = true; break;
 					case 4:  Location = MoveLoacation(); system("cls"); changeLocation = true; DDay(p); break;
-					case 5: UseGym(p); system("cls"); showedStats = true; break;
+					case 5: UseGym(p); system("cls"); break;
 					}
 				}
 				break;
