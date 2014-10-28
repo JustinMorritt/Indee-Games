@@ -1,11 +1,11 @@
-#include <sstream> 
+﻿#include <sstream> 
 #include <iostream>
 #include <iomanip>
 #include <fstream>
 #include <utility>
 #include "DopeWarz.h"
 #include "Market.h"
-
+#include "randgen.h"
 
 
 DopeWarz::DopeWarz() : m_BankMoney(0)
@@ -487,7 +487,7 @@ while (choice6 != 0 && choice6 != 4 && m_DaysLeft != 0 && p->GetHealth() > 0)
 
 					case 3:  p->DisplayStats(pname); system("pause"); system("cls"); showedStats = true; break;
 					case 4:  Location = MoveLoacation(); system("cls"); changeLocation = true; DDay(p); break;
-					case 5: UseLibrary(p); system("cls"); break;
+					case 5: UseLibrary(p); system("cls"); DDay(p); break;
 					}
 				}
 				break;
@@ -777,8 +777,8 @@ void DopeWarz::BuyGuns(Player * p)
 						" |~~~|--------------~~~~~~~~~~~~~~~~,xx.~~~~~~~~| \n"
 						" |___|-------++++==|___|~~~~~|_____(x@x),;'//  || \n"
 						"                   |~~~||    |~~~~~~~~~~~ //   || \n"
-						"                    ~`(_(=)~~ ,-~-\       \  __/  \n"
-						"                       ~~~~~\[  \ ]`       \/     \n"
+						"                    ~`(_(=)~~ ,-~-;       ;  __/  \n"
+						"                       ~~~~~\[  ; ]`       ;/     \n"
 						"                             `:  |'()       `    \n"
 						"                               ~~~~` `       `   \n"
 						"                                    ` `       `   \n"
@@ -787,7 +787,7 @@ void DopeWarz::BuyGuns(Player * p)
 						"                                       ` `       ||   \n"
 						"                                        | `       ||  \n"
 						"                                        |  `_  ___|| \n"
-						"                                        \____( )-=~  \n";
+						"                                        '____( )-=~  \n";
 
 					cout << "\nBuy This?!\n"
 						<< "(1) Yes ($500)\n"
@@ -802,7 +802,7 @@ void DopeWarz::BuyGuns(Player * p)
 						{
 							unsigned ret = (money - 500);
 							p->SetMoney(ret);
-							pair<string, pair<unsigned, unsigned>> gun = make_pair("Auto Scope Sniper", make_pair(1, 25));
+							pair<string, pair<unsigned, unsigned>> gun = make_pair("Luger", make_pair(1, 25));
 							p->AddGun(gun);
 							cout << "\nThanks for Buying The Luger \n";
 							system("pause");
@@ -1465,10 +1465,169 @@ void DopeWarz::BuyGuns(Player * p)
 
 void DopeWarz::UseLibrary(Player * p)
 {
+	int choice;
+	system("cls");
+	cout << "\nWelcome to the Library!\n"
+		<< "(1) Read a Book!\n"
+		<< "(2) Leave\n";
+	choice = getLegitInt(1, 2);
+	RandGen rNg;
+	unsigned i = (rNg(10) + 1);
+	switch (choice)
+	{
+	case 1:
+		cout << "\nWhat Book Would you like to read?!\n"
+			<< "(1) 'Fear And Loathing In LasVegas'\n"
+			<< "(2) '50 shades of grey'\n"
+			<< "(3) 'The Hunger Games'\n"
+			<< "(4) 'Harry PotHead'\n"
+			<< "(5) 'Playboy Magazine'\n";
+			choice = getLegitInt(1, 5);
+		
+			switch (choice)
+			{
+			case 1:
+				if (unsigned j = (rNg(10) + 1) <= 5)
+				{
+					system("cls");
+			   cout << "\n\nWe had two bags of grass, seventy - five pellets of mescaline,\n"
+					<< "five sheets of high powered blotter acid, a salt shaker half full\n"
+					<< "of cocaine, and a whole galaxy of multi - colored uppers, downers,\n"
+					<< "screamers, laughers... and also a quart of tequila, a quart of rum,\n"
+					<< "a case of Budweiser, a pint of raw ether and two dozen amyls.\n"
+					<< " Not that we needed all that for the trip, but once you get locked \n"
+					<< "into a serious drug collection, the tendency is to push it as far\n"
+					<< "as you can. \n" "- Hunter S.Thompson, Fear and Loathing in Las Vegas\n";
+					p->AddSmarts(i);
+					cout << "\nAdded " << i << " Smarts...\n\n";
+					system("pause");
+				}
+				else
+				{
+					system("cls");
+					cout << "\n\nIn a closed society where everybody's guilty,the only crime is\n"
+					<< "getting caught. In a world of thieves, the only final sin is stupidity.\n"
+					<< " -Hunter S.Thompson, Fear and Loathing in Las Vegas\n";
+					p->AddSmarts(i);
+					cout << "\nAdded " << i << " Smarts...\n\n";
+					system("pause");
+				}
+				break;
+			case 2: 
+				if (unsigned j = (rNg(10) + 1) <= 5)
+				{
+					system("cls");
+					cout << "\n\nWhy don't you like to be touched?\n"
+					 	 << "Because I'm fifty shades of fucked-up, Anastasia\n"
+						 << "- E.L.James, Fifty Shades of Grey \n";
+					p->AddSmarts(i);
+					cout << "\nAdded " << i << " Smarts...\n\n";
+					system("pause");
+				}
+				else
+				{
+					system("cls");
+					cout << "\n\nDon't get your panties in such a twist... and give me back mine.\n"
+						 << " ― E.L.James, Fifty Shades of Grey \n";
+					p->AddSmarts(i);
+					cout << "\nAdded " << i << " Smarts...\n\n";
+					system("pause");
+				}
+				break;
+			case 3:
+				if (unsigned j = (rNg(10) + 1) <= 5)
+				{
+					system("cls");
+					cout << "\n\nHappy Hunger Games! And may the odds be ever in your favor.\n"
+						 << "― Suzanne Collins, The Hunger Games \n";
+					p->AddSmarts(i);
+					cout << "\nAdded " << i << " Smarts...\n\n";
+					system("pause");
+				}
+				else
+				{
+					system("cls");
+					cout << "\n\nThey'll either want to kill you, kiss you, or be you.\n"
+						 << "― Suzanne Collins, Mockingjay \n";
+					p->AddSmarts(i);
+					cout << "\nAdded " << i << " Smarts...\n\n";
+					system("pause");
+				}
+				break;
+			case 4:
+				if (unsigned j = (rNg(10) + 1) <= 5)
+				{
+					system("cls");
+					cout << "\n\nHe must have known I'd want to leave you.\n"
+						<< "No, he must have known you would always want to come back.\n"
+						<< "― J.K.Rowling, Harry Potter and the Deathly Hallows \n";
 
+					p->AddSmarts(i);
+					cout << "\nAdded " << i << " Smarts...\n\n";
+					system("pause");
+				}
+				else
+				{
+					system("cls");
+					cout << "\n\n'Don't talk to me.''Why not?''Because I want to fix that\n"
+						<< "in my memory for ever. Draco Malfoy, the amazing bouncing ferret...\n"
+						<< "― J.K.Rowling, Harry Potter and the Goblet of Fire \n";
+
+					p->AddSmarts(i);
+					cout << "\nAdded " << i << " Smarts...\n\n";
+					system("pause");
+				}
+				break;
+			case 5: 
+				if (unsigned j = (rNg(10) + 1) <= 5)
+				{
+					system("cls");
+					cout << "\n\nIf you want to live your life in a creative way, \n"
+						<< "as an artist, you have to not look back too much. \n"
+						<< "You have to be willing to take whatever you’ve done \n"
+						<< "and whoever you were and throw them away. The more \n"
+						<< "the outside world tries to reinforce an image of you, \n"
+						<< "the harder it is to continue to be an artist, which \n"
+						<< "is why a lot of times, artists have to say, \n"
+						<< "'Bye. I have to go. I’m going crazy and I’m getting out of here.'\n"
+						<< "And they go and hibernate somewhere. Maybe later \n"
+						<< "they re-emerge a little differently. \n\n"
+						<< "― Walter Isaacson, Steve Jobs \n";
+					
+					p->AddSmarts(i);
+					cout << "\nAdded " << i << " Smarts...\n\n";
+					system("pause");
+				}
+				else
+				{
+					system("cls");
+					cout << "\n\nThe playboy is not necessarily a man who has many girlfriends,\n"
+						<< "or a man who has many women, or a man who has slept with many\n"
+						<< "women. That is old. But there is a new breed of the playboy and \n"
+						<< "he is the man who remains single in attempts to make every woman\n"
+						<< "feel as if he belongs to her, he remains a virgin in order to make\n"
+						<< "every woman feel like she will be the first one, and in the end he\n"
+						<< "may choose a very unattractive woman to adorn his side, so that in\n"
+						<< "all circumstances, he will shine as the more beautiful one. This is\n"
+						<< "the new breed of playboy. And it is a very evil one.\n\n"
+						<< "― C.JoyBell C.\n";
+
+					p->AddSmarts(i);
+					cout << "\nAdded " << i << " Smarts...\n\n";
+					system("pause");
+				}
+				break;
+			}
+
+		break;
+	case 2: break;
+	}
 }
+
 void DopeWarz::UseGym(Player * p)
 {
+
+
 
 }
 

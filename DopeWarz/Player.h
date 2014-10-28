@@ -21,6 +21,7 @@ public:
 	virtual unsigned GetDebt() = 0;
 	virtual void SetMoney(unsigned money) = 0;
 	virtual void SetDebt(unsigned money) = 0;
+	virtual void AddSmarts(unsigned smarts) = 0;
 	virtual void IncreaseDebt() = 0;
 	virtual void Buy(Market& m) = 0;
 	virtual void Sell(Market& m) = 0;
@@ -51,6 +52,7 @@ public:
 	virtual unsigned GetDebt() { return m_Debt; };
 	virtual void SetMoney(unsigned money){ m_Money = money; };
 	virtual void SetDebt(unsigned money){ m_Debt = money; };
+	virtual void AddSmarts(unsigned smarts){ m_Smarts += smarts; };
 	virtual void IncreaseDebt();
 	virtual void DisplayStats(string name);
 	virtual unsigned GetBackpackSpace(){ return m_Backpack; };
@@ -97,6 +99,7 @@ public:
 	virtual unsigned GetDebt() { return m_Debt; };
 	virtual void SetMoney(unsigned money){ m_Money = money; };
 	virtual void SetDebt(unsigned money){ m_Debt = money; };
+	virtual void AddSmarts(unsigned smarts){ m_Smarts += smarts; };
 	virtual void IncreaseDebt();
 	virtual unsigned GetBackpackSpace(){ return m_Backpack; };
 	virtual unsigned GetUsedSpace(){ return m_UsedSpace; };
@@ -139,6 +142,7 @@ public:
 	virtual unsigned GetDebt() { return m_Debt; };
 	virtual void SetDebt(unsigned money){ m_Debt = money; };
 	virtual void SetMoney(unsigned money){ m_Money = money; };
+	virtual void AddSmarts(unsigned smarts){ m_Smarts += smarts; };
 	virtual void IncreaseDebt();
 	virtual void DisplayStats(string name);
 	virtual unsigned GetBackpackSpace(){ return m_Backpack; };
@@ -182,6 +186,7 @@ public:
 	virtual unsigned GetDebt() { return m_Debt; };
 	virtual void SetMoney(unsigned money){ m_Money = money; };
 	virtual void SetDebt(unsigned money){ m_Debt = money; };
+	virtual void AddSmarts(unsigned smarts){ m_Smarts += smarts; };
 	virtual void DisplayStats(string name);
 	virtual void IncreaseDebt();
 	virtual unsigned GetBackpackSpace(){ return m_Backpack; };

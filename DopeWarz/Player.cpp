@@ -388,6 +388,7 @@ void SmartPlayer::Sell(Market& m)
 			if (IsOnMarket)
 			{
 				EmptySack(backpack[choice - 1].second.first); //Empty
+				m_Money += (backpack[choice - 1].second.first * (m_Smarts/2));
 				m_Money += (backpack[choice - 1].second.first * m.MarketPrice(backpack[choice - 1].first));
 				cout << "\n Sold " << backpack[choice - 1].second.first 
 					 << " " << backpack[choice - 1].first << " at $" 
@@ -494,6 +495,7 @@ void TankyPlayer::Sell(Market& m)
 			if (IsOnMarket)
 			{
 				EmptySack(backpack[choice - 1].second.first); //Empty
+				m_Money += (backpack[choice - 1].second.first * (m_Smarts / 2));
 				m_Money += (backpack[choice - 1].second.first * m.MarketPrice(backpack[choice - 1].first));
 				cout << "\n Sold " << backpack[choice - 1].second.first
 					<< " " << backpack[choice - 1].first << " at $"
@@ -599,6 +601,7 @@ void QuickPlayer::Sell(Market& m)
 			if (IsOnMarket)
 			{
 				EmptySack(backpack[choice - 1].second.first); //Empty
+				m_Money += (backpack[choice - 1].second.first * (m_Smarts / 2));
 				m_Money += (backpack[choice - 1].second.first * m.MarketPrice(backpack[choice - 1].first));
 				cout << "\n Sold " << backpack[choice - 1].second.first
 					<< " " << backpack[choice - 1].first << " at $"
@@ -704,6 +707,7 @@ void DangerPlayer::Sell(Market& m)
 			if (IsOnMarket)
 			{
 				EmptySack(backpack[choice - 1].second.first); //Empty
+				m_Money += (backpack[choice - 1].second.first * (m_Smarts / 2));
 				m_Money += (backpack[choice - 1].second.first * m.MarketPrice(backpack[choice - 1].first));
 				cout << "\n Sold " << backpack[choice - 1].second.first
 					<< " " << backpack[choice - 1].first << " at $"
