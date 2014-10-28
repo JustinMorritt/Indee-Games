@@ -1626,7 +1626,133 @@ void DopeWarz::UseLibrary(Player * p)
 
 void DopeWarz::UseGym(Player * p)
 {
+	//CREATE A 10% CHANCE  TO GET INJURED , CAUSEING A RANDOM 1-10 DAMAGE ....
+	int choice;
+	system("cls");
+	cout << "\nWelcome to the Library!\n"
+		<< "(1) Read a Book!\n"
+		<< "(2) Leave\n";
+	choice = getLegitInt(1, 2);
+	RandGen rNg;
+	unsigned i = (rNg(10) + 1);
+	switch (choice)
+	{
+	case 1:
+		cout << "\nHow you gunna prove your strong ?!\n"
+			<< "(1) Bench Press\n"
+			<< "(2) Barbell Shoulder Press\n"
+			<< "(3) Leg Press\n"
+			<< "(4) Squats\n"
+			<< "(5) DeadLifts\n";
+		choice = getLegitInt(1, 5);
 
+		switch (choice)
+		{
+		case 1:
+			if (unsigned j = (rNg(10) + 1) > 1)
+			{
+				system("cls");
+				cout << "\n\nWe had two bags of grass, seventy - five pellets of mescaline,\n";
+	
+				p->IncMaxHP(i);
+				cout << "\nAdded " << i << " Smarts...\n\n";
+				system("pause");
+			}
+			else
+			{
+				system("cls");
+				cout << "\n\nIn a closed society where everybody's guilty,the only crime is\n";
+			
+				p->TakeDamage(i);
+				cout << "\nAdded " << i << " Smarts...\n\n";
+				system("pause");
+			}
+			break;
+		case 2:
+			if (unsigned j = (rNg(10) + 1) > 1)
+			{
+				system("cls");
+				cout << "\n\nWhy don't you like to be touched?\n";
+	
+				p->IncMaxHP(i);
+				cout << "\nAdded " << i << " Smarts...\n\n";
+				system("pause");
+			}
+			else
+			{
+				system("cls");
+				cout << "\n\nDon't get your panties in such a twist... and give me back mine.\n";
+			
+				p->TakeDamage(i);
+				cout << "\nAdded " << i << " Smarts...\n\n";
+				system("pause");
+			}
+			break;
+		case 3:
+			if (unsigned j = (rNg(10) + 1) > 1)
+			{
+				system("cls");
+				cout << "\n\nHappy Hunger Games! And may the odds be ever in your favor.\n";
+			
+				p->IncMaxHP(i);
+				cout << "\nAdded " << i << " Smarts...\n\n";
+				system("pause");
+			}
+			else
+			{
+				system("cls");
+				cout << "\n\nThey'll either want to kill you, kiss you, or be you.\n";
+
+				p->TakeDamage(i);
+				cout << "\nAdded " << i << " Smarts...\n\n";
+				system("pause");
+			}
+			break;
+		case 4:
+			if (unsigned j = (rNg(10) + 1) > 1)
+			{
+				system("cls");
+				cout << "\n\nHe must have known I'd want to leave you.\n";
+
+				p->IncMaxHP(i);
+				cout << "\nAdded " << i << " Smarts...\n\n";
+				system("pause");
+			}
+			else
+			{
+				system("cls");
+				cout << "\n\n'Don't talk to me.''Why not?''Because I want to fix that\n";
+
+				p->TakeDamage(i);
+				cout << "\nAdded " << i << " Smarts...\n\n";
+				system("pause");
+			}
+			break;
+		case 5:
+			if (unsigned j = (rNg(10) + 1) > 1)
+			{
+				system("cls");
+				cout << "\n\nIf you want to live your life in a creative way, \n";
+
+				p->IncMaxHP(i);
+				cout << "\nAdded " << i << " Smarts...\n\n";
+				system("pause");
+			}
+			else
+			{
+				system("cls");
+				cout << "\n\nThe playboy is not necessarily a man who has many girlfriends,\n";
+
+				p->TakeDamage(i);
+				cout << "\nAdded " << i << " Smarts...\n\n";
+				system("pause");
+			}
+			break;
+		}
+
+		break;
+	case 2: break;
+	}
 
 
 }

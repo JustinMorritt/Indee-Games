@@ -8,12 +8,14 @@
 
 using namespace std;
 
-class Player
+class Player //INTERFACE
 {
 public:
 	virtual int GetHealth() = 0;
 	virtual int GetMaxHealth() = 0;
 	virtual void SetHealth(int health) = 0;
+	virtual void TakeDamage(int dmg) = 0;
+	virtual void IncMaxHP(int hp) = 0;
 	virtual void DisplayStats(string name) = 0;
 	virtual unsigned GetBackpackSpace() = 0;
 	virtual unsigned GetUsedSpace() = 0;
@@ -47,7 +49,9 @@ public:
 	~SmartPlayer();
 	virtual int GetHealth(){ return m_Health; };
 	virtual int GetMaxHealth(){ return m_MaxHealth; };
+	virtual void TakeDamage(int dmg){ m_Health -= dmg; };
 	virtual void SetHealth(int health){ m_Health = health; };
+	virtual void IncMaxHP(int hp){ m_MaxHealth += hp; };
 	virtual unsigned GetMoney(){ return m_Money; };
 	virtual unsigned GetDebt() { return m_Debt; };
 	virtual void SetMoney(unsigned money){ m_Money = money; };
@@ -94,6 +98,8 @@ public:
 	virtual int GetHealth(){ return m_Health; };
 	virtual int GetMaxHealth(){ return m_MaxHealth; };
 	virtual void SetHealth(int health){ m_Health = health; };
+	virtual void TakeDamage(int dmg){ m_Health -= dmg; };
+	virtual void IncMaxHP(int hp){ m_MaxHealth += hp; };
 	virtual void DisplayStats(string name);
 	virtual unsigned GetMoney(){ return m_Money; };
 	virtual unsigned GetDebt() { return m_Debt; };
@@ -138,6 +144,8 @@ public:
 	virtual int GetHealth(){ return m_Health; };
 	virtual int GetMaxHealth(){ return m_MaxHealth; };
 	virtual void SetHealth(int health){ m_Health = health; };
+	virtual void TakeDamage(int dmg){ m_Health -= dmg; };
+	virtual void IncMaxHP(int hp){ m_MaxHealth += hp; };
 	virtual unsigned GetMoney(){ return m_Money; };
 	virtual unsigned GetDebt() { return m_Debt; };
 	virtual void SetDebt(unsigned money){ m_Debt = money; };
@@ -182,6 +190,8 @@ public:
 	virtual int GetHealth(){ return m_Health; };
 	virtual int GetMaxHealth(){ return m_MaxHealth; };
 	virtual void SetHealth(int health){ m_Health = health; };
+	virtual void TakeDamage(int dmg){ m_Health -= dmg; };
+	virtual void IncMaxHP(int hp){ m_MaxHealth += hp; };
 	virtual unsigned GetMoney(){ return m_Money; };
 	virtual unsigned GetDebt() { return m_Debt; };
 	virtual void SetMoney(unsigned money){ m_Money = money; };

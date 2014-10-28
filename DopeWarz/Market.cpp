@@ -73,13 +73,29 @@ void Market::BuildMarket()
 }
 void Market::DisplayMarket() 
 {
+	RandGen rNg;
 	cout << "\n\n<-----The Market Today----->\n\n";
+	int j = (rNg(12) + 1);
+	int mult = (rNg(4) + 1.5);
 	int i = 1;
 	for (vector<pair<string, unsigned>>::iterator it = m_Drugs.begin(); it != m_Drugs.end(); ++it)
 	{	
-		cout << "(" << i << ") "  << setw(10) << it->first << " $" << it->second << endl;
-		++i;
+		if (i == j)
+		{
+			it->second *= mult;
+			cout << "******Massive Drug Bust******\n";
+			cout << "(" << i << ") " << setw(10) << it->first << " $" << it->second << " <---Sky High Prices!\n";
+			
+			++i;
+		}
+		else
+		{
+			cout << "(" << i << ") "  << setw(10) << it->first << " $" << it->second << endl;
+			++i;
+		}
+		
 	}
+	
 }
 unsigned Market::GetPrice(int choice) const
 {
