@@ -1629,8 +1629,8 @@ void DopeWarz::UseGym(Player * p)
 	//CREATE A 10% CHANCE  TO GET INJURED , CAUSEING A RANDOM 1-10 DAMAGE ....
 	int choice;
 	system("cls");
-	cout << "\nWelcome to the Library!\n"
-		<< "(1) Read a Book!\n"
+	cout << "\nWelcome to the Gym!\n"
+		<< "(1) Pump Iron!\n"
 		<< "(2) Leave\n";
 	choice = getLegitInt(1, 2);
 	RandGen rNg;
