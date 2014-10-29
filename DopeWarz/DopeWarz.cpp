@@ -200,6 +200,8 @@ void DopeWarz::Play(string name, unsigned Class, unsigned days)
 	int Location = 0; 
 	while (p->GetHealth() != 0 && m_DaysLeft != 0 && quit == false)
 	{
+		//INSERT RANDOM POLICE ENCOUNTER
+		//INSERT RANDOM LOAN SHARK ENCOUNTER (IF dEBT != 0)
 		int choice2 = 2; int choice = 2; int choice3 = 2; int choice4 = 2; int choice5 = 2; int choice6 = 2; int choice7 = 2;
 		Market market;
 		Market& m = market;
@@ -535,7 +537,7 @@ while (choice6 != 0 && choice6 != 4 && m_DaysLeft != 0 && p->GetHealth() > 0)
 
 					case 3:  p->DisplayStats(pname); system("pause"); system("cls"); showedStats = true; break;
 					case 4:  Location = MoveLoacation(); system("cls"); changeLocation = true; DDay(p); break;
-					case 5: UseGym(p); system("cls"); break;
+					case 5: UseGym(p); system("cls"); DDay(p); break;
 					}
 				}
 				break;
@@ -636,9 +638,12 @@ void DopeWarz::PayLoanShark(Player * p)
 void DopeWarz::GoToHospital(Player * p)
 {
 	//heal rate ....    20 / HP 20 * 100 =  2 Grand for full HP
+	int hpHealed = (p->GetMaxHealth() - p->GetHealth());
+	unsigned cost = (hpHealed * 20);
+	unsigned money = p->GetMoney();
 	int choice;
 	cout << "\nWelcome to the hospital!\n"
-		<< "(1) Heal Up!\n"
+		<< "(1) Heal Up! ($" << cost << ")\n"
 		<< "(2) Leave\n";
 	choice = getLegitInt(1, 2);
 	switch (choice)
@@ -652,9 +657,6 @@ void DopeWarz::GoToHospital(Player * p)
 		}
 		else
 		{
-			int hpHealed = (p->GetMaxHealth() - p->GetHealth());
-			unsigned cost = (hpHealed * 20);
-			unsigned money = p->GetMoney();
 			if((money - cost) < 0)
 			{
 				cout << "\nNot Enough Money...we arnt touching you ! \n"
@@ -671,15 +673,10 @@ void DopeWarz::GoToHospital(Player * p)
 			system("pause");
 			break;
 			}
-	
 		}
 		break;
 	case 2: break;
 	}
-
-
-
-
 }
 
 void DopeWarz::UseBank(Player * p)
@@ -1635,6 +1632,8 @@ void DopeWarz::UseGym(Player * p)
 	choice = getLegitInt(1, 2);
 	RandGen rNg;
 	unsigned i = (rNg(10) + 1);
+	unsigned reps = (rNg(10) + 1);
+	unsigned weight = (rNg(200) + 100);
 	switch (choice)
 	{
 	case 1:
@@ -1652,19 +1651,18 @@ void DopeWarz::UseGym(Player * p)
 			if (unsigned j = (rNg(10) + 1) > 2)
 			{
 				system("cls");
-				cout << "\n\nWe had two bags of grass, seventy - five pellets of mescaline,\n";
+				cout << "\n\nNice! , Benchpressed " << weight << " pounds for " << reps << " reps. \n";
 	
 				p->IncMaxHP(i);
-				cout << "\nAdded " << i << " Smarts...\n\n";
+				cout << "\nAdded " << i << " To MaxHealth...\n\n";
 				system("pause");
 			}
 			else
 			{
 				system("cls");
-				cout << "\n\nIn a closed society where everybody's guilty,the only crime is\n";
-			
+				cout << "\n\nWhoa Buddy ! you pushed too hard and hurt yourself!\n";
 				p->TakeDamage(i);
-				cout << "\nAdded " << i << " Smarts...\n\n";
+				cout << "\Dealt " << i << " Damage...\n\n";
 				system("pause");
 			}
 			break;
@@ -1672,19 +1670,18 @@ void DopeWarz::UseGym(Player * p)
 			if (unsigned j = (rNg(10) + 1) > 2)
 			{
 				system("cls");
-				cout << "\n\nWhy don't you like to be touched?\n";
-	
+				cout << "\n\nNice! , Barbell Shoulder Pressed " << weight << " pounds for " << reps << " reps. \n";
+
 				p->IncMaxHP(i);
-				cout << "\nAdded " << i << " Smarts...\n\n";
+				cout << "\nAdded " << i << " To MaxHealth...\n\n";
 				system("pause");
 			}
 			else
 			{
 				system("cls");
-				cout << "\n\nDon't get your panties in such a twist... and give me back mine.\n";
-			
+				cout << "\n\nWhoa Buddy ! you pushed too hard and hurt yourself!\n";
 				p->TakeDamage(i);
-				cout << "\nAdded " << i << " Smarts...\n\n";
+				cout << "\Dealt " << i << " Damage...\n\n";
 				system("pause");
 			}
 			break;
@@ -1692,19 +1689,18 @@ void DopeWarz::UseGym(Player * p)
 			if (unsigned j = (rNg(10) + 1) > 2)
 			{
 				system("cls");
-				cout << "\n\nHappy Hunger Games! And may the odds be ever in your favor.\n";
-			
+				cout << "\n\nNice! , Leg Pressed " << weight << " pounds for " << reps << " reps. \n";
+
 				p->IncMaxHP(i);
-				cout << "\nAdded " << i << " Smarts...\n\n";
+				cout << "\nAdded " << i << " To MaxHealth...\n\n";
 				system("pause");
 			}
 			else
 			{
 				system("cls");
-				cout << "\n\nThey'll either want to kill you, kiss you, or be you.\n";
-
+				cout << "\n\nWhoa Buddy ! you pushed too hard and hurt yourself!\n";
 				p->TakeDamage(i);
-				cout << "\nAdded " << i << " Smarts...\n\n";
+				cout << "\Dealt " << i << " Damage...\n\n";
 				system("pause");
 			}
 			break;
@@ -1712,19 +1708,18 @@ void DopeWarz::UseGym(Player * p)
 			if (unsigned j = (rNg(10) + 1) > 2)
 			{
 				system("cls");
-				cout << "\n\nHe must have known I'd want to leave you.\n";
+				cout << "\n\nNice! , Squat " << weight << " pounds for " << reps << " reps. \n";
 
 				p->IncMaxHP(i);
-				cout << "\nAdded " << i << " Smarts...\n\n";
+				cout << "\nAdded " << i << " To MaxHealth...\n\n";
 				system("pause");
 			}
 			else
 			{
 				system("cls");
-				cout << "\n\n'Don't talk to me.''Why not?''Because I want to fix that\n";
-
+				cout << "\n\nWhoa Buddy ! you pushed too hard and hurt yourself!\n";
 				p->TakeDamage(i);
-				cout << "\nAdded " << i << " Smarts...\n\n";
+				cout << "\Dealt " << i << " Damage...\n\n";
 				system("pause");
 			}
 			break;
@@ -1732,19 +1727,18 @@ void DopeWarz::UseGym(Player * p)
 			if (unsigned j = (rNg(10) + 1) > 2)
 			{
 				system("cls");
-				cout << "\n\nIf you want to live your life in a creative way, \n";
+				cout << "\n\nNice! , DeadLifted " << weight << " pounds for" << reps << " reps. \n";
 
 				p->IncMaxHP(i);
-				cout << "\nAdded " << i << " Smarts...\n\n";
+				cout << "\nAdded " << i << " To MaxHealth...\n\n";
 				system("pause");
 			}
 			else
 			{
 				system("cls");
-				cout << "\n\nThe playboy is not necessarily a man who has many girlfriends,\n";
-
+				cout << "\n\nWhoa Buddy ! you pushed too hard and hurt yourself!\n";
 				p->TakeDamage(i);
-				cout << "\nAdded " << i << " Smarts...\n\n";
+				cout << "\Dealt " << i << " Damage...\n\n";
 				system("pause");
 			}
 			break;
