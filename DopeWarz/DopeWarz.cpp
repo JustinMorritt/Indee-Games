@@ -1649,7 +1649,7 @@ void DopeWarz::UseGym(Player * p)
 		switch (choice)
 		{
 		case 1:
-			if (unsigned j = (rNg(10) + 1) > 1)
+			if (unsigned j = (rNg(10) + 1) > 2)
 			{
 				system("cls");
 				cout << "\n\nWe had two bags of grass, seventy - five pellets of mescaline,\n";
@@ -1669,7 +1669,7 @@ void DopeWarz::UseGym(Player * p)
 			}
 			break;
 		case 2:
-			if (unsigned j = (rNg(10) + 1) > 1)
+			if (unsigned j = (rNg(10) + 1) > 2)
 			{
 				system("cls");
 				cout << "\n\nWhy don't you like to be touched?\n";
@@ -1689,7 +1689,7 @@ void DopeWarz::UseGym(Player * p)
 			}
 			break;
 		case 3:
-			if (unsigned j = (rNg(10) + 1) > 1)
+			if (unsigned j = (rNg(10) + 1) > 2)
 			{
 				system("cls");
 				cout << "\n\nHappy Hunger Games! And may the odds be ever in your favor.\n";
@@ -1709,7 +1709,7 @@ void DopeWarz::UseGym(Player * p)
 			}
 			break;
 		case 4:
-			if (unsigned j = (rNg(10) + 1) > 1)
+			if (unsigned j = (rNg(10) + 1) > 2)
 			{
 				system("cls");
 				cout << "\n\nHe must have known I'd want to leave you.\n";
@@ -1729,7 +1729,7 @@ void DopeWarz::UseGym(Player * p)
 			}
 			break;
 		case 5:
-			if (unsigned j = (rNg(10) + 1) > 1)
+			if (unsigned j = (rNg(10) + 1) > 2)
 			{
 				system("cls");
 				cout << "\n\nIf you want to live your life in a creative way, \n";
