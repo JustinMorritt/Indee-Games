@@ -25,6 +25,8 @@ public:
 	void DDay(Player * p){ --m_DaysLeft; p->IncreaseDebt(); };
 	int MoveLoacation() const;
 
+	void LoanSharkEncounter(Player * p);
+	void PoliceEncounter(Player * p); //10% chance
 	void PayLoanShark(Player * p);
 	void GoToHospital(Player * p);
 	void BuyGuns(Player * p);

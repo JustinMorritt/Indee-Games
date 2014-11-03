@@ -200,8 +200,28 @@ void DopeWarz::Play(string name, unsigned Class, unsigned days)
 	int Location = 0; 
 	while (p->GetHealth() != 0 && m_DaysLeft != 0 && quit == false)
 	{
-		//INSERT RANDOM POLICE ENCOUNTER
-		//INSERT RANDOM LOAN SHARK ENCOUNTER (IF dEBT != 0)
+		RandGen rNg;
+		unsigned j = (rNg(10) + 1);
+		if (j == 1)//INSERT RANDOM POLICE ENCOUNTER
+		{
+			PoliceEncounter(p);
+		}
+		if (j == 9)//INSERT RANDOM LOAN SHARK ENCOUNTER (IF dEBT != 0)
+		{
+			if (p->GetDebt() != 0)
+			{
+				LoanSharkEncounter(p);
+			}
+		}
+		if (p->GetHealth() <= 0)//check HP
+		{
+			break;
+		}
+		
+		
+		
+		
+		
 		int choice2 = 2; int choice = 2; int choice3 = 2; int choice4 = 2; int choice5 = 2; int choice6 = 2; int choice7 = 2;
 		Market market;
 		Market& m = market;
@@ -548,7 +568,15 @@ while (choice6 != 0 && choice6 != 4 && m_DaysLeft != 0 && p->GetHealth() > 0)
 
 
 
+void DopeWarz::PoliceEncounter(Player * p)
+{
 
+}
+
+void DopeWarz::LoanSharkEncounter(Player * p)
+{
+
+}
 
 int DopeWarz::MoveLoacation() const
 {
