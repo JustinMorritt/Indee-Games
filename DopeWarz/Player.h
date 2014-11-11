@@ -21,6 +21,7 @@ public:
 	virtual unsigned GetUsedSpace() = 0;
 	virtual unsigned GetMoney() = 0;
 	virtual unsigned GetDebt() = 0;
+	virtual unsigned GetSpeed() = 0;
 	virtual void SetMoney(unsigned money) = 0;
 	virtual void SetDebt(unsigned money) = 0;
 	virtual void AddSmarts(unsigned smarts) = 0;
@@ -61,6 +62,7 @@ public:
 	virtual void DisplayStats(string name);
 	virtual unsigned GetBackpackSpace(){ return m_Backpack; };
 	virtual unsigned GetUsedSpace(){ return m_UsedSpace; };
+	virtual unsigned GetSpeed(){ return m_Speed; };
 	vector<pair<string, pair<unsigned, unsigned>>>& GetSack(){ return m_Product; };
 	vector<pair<string, pair<unsigned, unsigned>>>& GetGuns(){ return m_Guns; };
 	virtual void AddGun(pair<string, pair<unsigned, unsigned>> gun);
@@ -109,6 +111,7 @@ public:
 	virtual void IncreaseDebt();
 	virtual unsigned GetBackpackSpace(){ return m_Backpack; };
 	virtual unsigned GetUsedSpace(){ return m_UsedSpace; };
+	virtual unsigned GetSpeed(){ return m_Speed; };
 	vector<pair<string, pair<unsigned, unsigned>>>& GetSack(){ return m_Product; };
 	vector<pair<string, pair<unsigned, unsigned>>>& GetGuns(){ return m_Guns; };
 	virtual void AddGun(pair<string, pair<unsigned, unsigned>> gun);
@@ -155,6 +158,7 @@ public:
 	virtual void DisplayStats(string name);
 	virtual unsigned GetBackpackSpace(){ return m_Backpack; };
 	virtual unsigned GetUsedSpace(){ return m_UsedSpace; };
+	virtual unsigned GetSpeed(){ return m_Speed; };
 	vector<pair<string, pair<unsigned, unsigned>>>& GetSack(){ return m_Product; };
 	vector<pair<string, pair<unsigned, unsigned>>>& GetGuns(){ return m_Guns; };
 	virtual void AddGun(pair<string, pair<unsigned, unsigned>> gun);
@@ -203,6 +207,7 @@ public:
 	virtual unsigned GetUsedSpace(){ return m_UsedSpace; };
 	void FillSack(int units){ m_UsedSpace += units; };
 	void EmptySack(int units){ m_UsedSpace -= units; };
+	virtual unsigned GetSpeed(){ return m_Speed; };
 	vector<pair<string, pair<unsigned, unsigned>>>& GetSack(){ return m_Product; };
 	vector<pair<string, pair<unsigned, unsigned>>>& GetGuns(){ return m_Guns; };
 	virtual void AddGun(pair<string, pair<unsigned, unsigned>> gun);

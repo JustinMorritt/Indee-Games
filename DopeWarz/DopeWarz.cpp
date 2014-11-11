@@ -202,11 +202,11 @@ void DopeWarz::Play(string name, unsigned Class, unsigned days)
 	{
 		RandGen rNg;
 		unsigned j = (rNg(10) + 1);
-		if (j == 1)//INSERT RANDOM POLICE ENCOUNTER
+		if (j == 1 || j == 8)//INSERT RANDOM POLICE ENCOUNTER
 		{
 			PoliceEncounter(p);
 		}
-		if (j == 9)//INSERT RANDOM LOAN SHARK ENCOUNTER (IF dEBT != 0)
+		if (j == 9 || j == 3)//INSERT RANDOM LOAN SHARK ENCOUNTER (IF dEBT != 0)
 		{
 			if (p->GetDebt() != 0)
 			{
@@ -570,6 +570,98 @@ while (choice6 != 0 && choice6 != 4 && m_DaysLeft != 0 && p->GetHealth() > 0)
 
 void DopeWarz::PoliceEncounter(Player * p)
 {
+	RandGen rNg;
+	unsigned policehp = (rNg(150) + 100);
+	unsigned popohpleft = policehp;
+	unsigned baserunaway = 2;
+	
+	bool ranAway = false;
+	while (p->GetHealth() > 0 && popohpleft > 0 && !ranAway)
+	{
+		unsigned getaway = (rNg(10) + 1);
+		unsigned copFire = (rNg(10) + 1);
+		unsigned youFire = (rNg(10) + 1);
+		unsigned copDmg = (rNg(20) + 1);
+		system("cls");
+		cout << "***********POLICE ENCOUNTER !*************\n"
+			<< "            \n "
+			<< "                       ________________   \n"
+			<< "                       '      __      /         __\n"
+			<< "                        '_____()_____/         /  )\n"
+			<< "                        '============`        /  /\n"
+			<< "                         #---`  `---#        /  /\n"
+			<< "                        (# @`| |`@ #)       /  /\n"
+			<< "                         |   (_)   /       /  /\n"
+			<< "                         |, '---` /|      /  /\n"
+			<< "                 _______/ `,_____// '____/ o_|\n"
+			<< "                /       '  /     '  /   / o_|\n"
+			<< "               / |           o|        / o_| ;\n"
+			<< "              /  |  _____     |       / /   , ;\n"
+			<< "             /   |  |===|    o|      / /,    , ;\n"
+			<< "            |    |   '@/      |     / /  ,    , ;\n"
+			<< "            |    |___________o|__/----)   ,    `/\n"
+			<< "            |    '              ||  --)    ,     |\n"
+			<< "            |___________________||  --)   __,    /\n"
+			<< "                 |           o|   ''''   |   ,__/\n"
+			<< "                 |            |          |\n"
+			<< "*************************************************\n"
+			<< "\tPOLICE HP : " << popohpleft << "/" <<  policehp << " \n"
+			<< "\tYOUR HP : " << p->GetHealth() << "/" << p->GetMaxHealth() << " \n"
+			<< "*************************************************\n"
+			<< "What to Do ?\n"
+			<< "(1) Run\n"
+			<< "(2) Shoot\n";
+			int choice = getLegitInt(1, 2);
+			switch (choice)
+			{
+			case 1: 
+				
+				if(p->GetSpeed() > 0)
+				{
+					baserunaway = 5;
+				}
+			
+				if (getaway <= baserunaway)
+				{
+					ranAway == true;
+				}
+				else
+				{
+					if (copFire > 5)
+					{
+						cout << "\n Cop Fires At you ! He hit you for " << copDmg << " damage !\n";
+						p->TakeDamage(copDmg);
+						system("pause");
+					}
+					else
+					{
+						cout << "\n Cop Fires At you ! He missed .... phew\n";
+						system("pause");
+					}
+				}
+
+				break;
+			case 2: 
+				
+				
+				break;
+			}
+
+			
+			if (ranAway)
+			{
+				cout << "\n GOOD JOB! you ran away !\n";
+				system("pause");
+				break;
+			}
+
+
+	}
+	
+	
+	
+
+
 
 }
 
