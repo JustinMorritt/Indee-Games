@@ -774,10 +774,10 @@ void DopeWarz::GoToHospital(Player * p)
 			cout << "\nYou Already Have full health !\n";
 			system("pause");
 			break;
-		}
+		}                                                      
 		else
 		{
-			if((money - cost) < 0)
+			if((cost > money))
 			{
 				cout << "\nNot Enough Money...we arnt touching you ! \n"
 					<< "Come back when you have $" << cost << " atleast! cheapskate!\n";
