@@ -623,7 +623,8 @@ void DopeWarz::PoliceEncounter(Player * p)
 			
 				if (getaway <= baserunaway)
 				{
-					ranAway == true;
+					ranAway = true;
+					break;
 				}
 				else
 				{
@@ -640,20 +641,41 @@ void DopeWarz::PoliceEncounter(Player * p)
 					}
 				}
 
+
 				break;
 			case 2: 
+
+				
+
+
+
+				if (youFire > 5)
+				{
+					if (copFire > 5)
+					{
+						cout << "\n Cop Fires At you ! He hit you for " << copDmg << " damage !\n";
+						p->TakeDamage(copDmg);
+						system("pause");
+					}
+					else
+					{
+						cout << "\n Cop Fires At you ! He missed .... phew\n";
+						system("pause");
+					}
+				}
 				
 				
 				break;
 			}
 
 			
-			if (ranAway)
-			{
-				cout << "\n GOOD JOB! you ran away !\n";
-				system("pause");
-				break;
-			}
+		if (ranAway)
+		{
+			cout << "\n You Ran Away !  probably because of those 'Jays on your feet'!\n";
+			system("pause");
+			system("cls");
+			break;
+		}
 
 
 	}
