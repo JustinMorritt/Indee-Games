@@ -641,13 +641,8 @@ void DopeWarz::PoliceEncounter(Player * p)
 					}
 				}
 
-
 				break;
 			case 2: 
-
-				
-
-
 
 				if (youFire > 5)
 				{
@@ -663,12 +658,9 @@ void DopeWarz::PoliceEncounter(Player * p)
 						system("pause");
 					}
 				}
-				
-				
 				break;
 			}
 
-			
 		if (ranAway)
 		{
 			cout << "\n You Ran Away !  probably because of those 'Jays on your feet'!\n";
@@ -676,20 +668,108 @@ void DopeWarz::PoliceEncounter(Player * p)
 			system("cls");
 			break;
 		}
-
-
 	}
-	
-	
-	
-
-
-
 }
 
 void DopeWarz::LoanSharkEncounter(Player * p)
 {
+	RandGen rNg;
+	unsigned LShp = (rNg(150) + 100);
+	unsigned LShpleft = LShp;
+	unsigned baserunaway = 2;
 
+	bool ranAway = false;
+	while (p->GetHealth() > 0 && LShpleft > 0 && !ranAway)
+	{
+		unsigned getaway = (rNg(10) + 1);
+		unsigned copFire = (rNg(10) + 1);
+		unsigned youFire = (rNg(10) + 1);
+		unsigned LSDmg = (rNg(20) + 1);
+		system("cls");
+		cout << "***********LOANSHARK ENCOUNTER !*************\n"
+			<< "            \n "
+			   << "                               /^;/^;	\n"
+			   << "                              `---- |    \n"
+			   << "                          _---'---~~~~-_\n"
+			   << "                          ~~~|~~L~|~~~~\n"
+			   << "                            (/_  /~~--\n"
+			   << "                          `~ `  /  /~\n"
+			   << "                        __~`  ~ /   ~~----,\n"
+			   << "                        `    | |       /  `\n"
+               << "						   `|   |/       |    |\n"
+			   << "                        | | | o  o     /~   |\n"
+			   << "                      _-~_  |        ||  `  /\n"
+			   << "                     (// )) | o  o    ``---'\n"
+			   << "                     //_- |  |          `\n"
+			   << "                    //   |____|`______`__`\n"
+			   << "                    ~      |   / |    |\n"
+			   << "                            |_ /   ` _|\n"
+			   << "                          /~___|  /____` \n"
+			<< "*************************************************\n"
+			<< "\tLOANSHARK HP : " << LShpleft << "/" << LShp << " \n"
+			<< "\tYOUR HP : " << p->GetHealth() << "/" << p->GetMaxHealth() << " \n"
+			<< "*************************************************\n"
+			<< "What to Do ?\n"
+			<< "(1) Run\n"
+			<< "(2) Shoot\n";
+		int choice = getLegitInt(1, 2);
+		switch (choice)
+		{
+		case 1:
+
+			if (p->GetSpeed() > 0)
+			{
+				baserunaway = 5;
+			}
+
+			if (getaway <= baserunaway)
+			{
+				ranAway = true;
+				break;
+			}
+			else
+			{
+				if (copFire > 5)
+				{
+					cout << "\n Loanshark Fires At you ! He hit you for " << LSDmg << " damage !\n";
+					p->TakeDamage(LSDmg);
+					system("pause");
+				}
+				else
+				{
+					cout << "\n Loanshark Fires At you ! He missed .... phew\n";
+					system("pause");
+				}
+			}
+
+			break;
+		case 2:
+
+			if (youFire > 5)
+			{
+				if (copFire > 5)
+				{
+					cout << "\n Loanshark Fires At you ! He hit you for " << LSDmg << " damage !\n";
+					p->TakeDamage(LSDmg);
+					system("pause");
+				}
+				else
+				{
+					cout << "\n Loanshark Fires At you ! He missed .... phew\n";
+					system("pause");
+				}
+			}
+			break;
+		}
+
+		if (ranAway)
+		{
+			cout << "\n You Ran Away !  probably because of those 'Jays on your feet'!\n";
+			system("pause");
+			system("cls");
+			break;
+		}
+	}
 }
 
 int DopeWarz::MoveLoacation() const
