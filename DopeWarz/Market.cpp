@@ -6,7 +6,7 @@
 
 using namespace std;
 
-Market::Market()
+Market::Market() : MarketShown(false)
 {
 	BuildMarket();
 }
@@ -80,14 +80,16 @@ void Market::DisplayMarket()
 	int i = 1;
 	for (vector<pair<string, unsigned>>::iterator it = m_Drugs.begin(); it != m_Drugs.end(); ++it)
 	{	
-		if (i == j)
+
+		if (i == j && GetMarketShown() == false)
 		{
 			it->second *= mult;
 			cout << "******Massive Drug Bust******\n";
 			cout << "(" << i << ") " << setw(10) << it->first << " $" << it->second << " <---Sky High Prices!\n";
-			
+
 			++i;
 		}
+
 		else
 		{
 			cout << "(" << i << ") "  << setw(10) << it->first << " $" << it->second << endl;
@@ -95,8 +97,20 @@ void Market::DisplayMarket()
 		}
 		
 	}
+
+	SetMarketShown(true);
 	
 }
+
+void Market::SetMarketShown(bool shown)
+{
+	MarketShown = true;
+}
+bool Market::GetMarketShown()
+{
+	return MarketShown;
+}
+
 unsigned Market::GetPrice(int choice) const
 {
 	return m_Drugs[choice - 1].second;

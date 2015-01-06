@@ -21,10 +21,14 @@ public:
 	unsigned MarketPrice(string drug);
 	string GetName(int choice) const;
 	vector<pair<string, unsigned>>& GetMap();
+	void SetMarketShown(bool shown);
+	bool GetMarketShown();
+
 
 private:
 	//DRUG NAME   PRICE
 	vector<pair<string, unsigned>> m_Drugs;
+	bool MarketShown;
 
 };
 
